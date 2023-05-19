@@ -43,6 +43,8 @@
             this.centerReceivText = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.centerReceivLab = new DevComponents.DotNetBar.LabelX();
             this.imgGPanel = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.aheadFre40 = new DevComponents.DotNetBar.ButtonX();
+            this.nextFre40 = new DevComponents.DotNetBar.ButtonX();
             this.loadDataBtn = new DevComponents.DotNetBar.ButtonX();
             this.loadDataLab = new DevComponents.DotNetBar.LabelX();
             this.centerText = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -306,6 +308,8 @@
             // 
             this.imgGPanel.CanvasColor = System.Drawing.SystemColors.Control;
             this.imgGPanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.imgGPanel.Controls.Add(this.aheadFre40);
+            this.imgGPanel.Controls.Add(this.nextFre40);
             this.imgGPanel.Controls.Add(this.loadDataBtn);
             this.imgGPanel.Controls.Add(this.loadDataLab);
             this.imgGPanel.Controls.Add(this.centerText);
@@ -346,11 +350,37 @@
             this.imgGPanel.TabIndex = 1;
             this.imgGPanel.Text = "信号图像";
             // 
+            // aheadFre40
+            // 
+            this.aheadFre40.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.aheadFre40.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.aheadFre40.Location = new System.Drawing.Point(49, 128);
+            this.aheadFre40.Margin = new System.Windows.Forms.Padding(2);
+            this.aheadFre40.Name = "aheadFre40";
+            this.aheadFre40.Size = new System.Drawing.Size(56, 18);
+            this.aheadFre40.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.aheadFre40.TabIndex = 7;
+            this.aheadFre40.Text = "上40帧";
+            this.aheadFre40.Click += new System.EventHandler(this.aheadFre40_Click);
+            // 
+            // nextFre40
+            // 
+            this.nextFre40.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.nextFre40.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.nextFre40.Location = new System.Drawing.Point(162, 121);
+            this.nextFre40.Margin = new System.Windows.Forms.Padding(2);
+            this.nextFre40.Name = "nextFre40";
+            this.nextFre40.Size = new System.Drawing.Size(56, 18);
+            this.nextFre40.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.nextFre40.TabIndex = 6;
+            this.nextFre40.Text = "下40帧";
+            this.nextFre40.Click += new System.EventHandler(this.nextFre40_Click);
+            // 
             // loadDataBtn
             // 
             this.loadDataBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.loadDataBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.loadDataBtn.Location = new System.Drawing.Point(23, 60);
+            this.loadDataBtn.Location = new System.Drawing.Point(92, 66);
             this.loadDataBtn.Margin = new System.Windows.Forms.Padding(2);
             this.loadDataBtn.Name = "loadDataBtn";
             this.loadDataBtn.Size = new System.Drawing.Size(56, 18);
@@ -593,6 +623,8 @@
         //tianxin
         private System.Windows.Forms.Timer timer_fft;
         private System.Windows.Forms.PictureBox dpxBox;
+        private DevComponents.DotNetBar.ButtonX aheadFre40;
+        private DevComponents.DotNetBar.ButtonX nextFre40;
     }
 }
 

@@ -57,7 +57,14 @@ namespace redioProj
 
         // tianxin
 
-        
+
+
+        //全频段信号数据
+        List<SignalInfo> all_signal;
+
+        Business[] business;
+        CeilFloor[]ceil_floor;
+        DataTable dataTable;
 
         private Socket tcpClient = null;//TCP句柄
         private Socket udpServes = null;//dup句柄
@@ -82,6 +89,25 @@ namespace redioProj
         int up = 100;
         int[] maxArr;
         JsonData m;
+
+        // 结构体
+        public class Business
+        {
+            public double[] fre { get; set; }
+            public string description { get; set; }
+        }
+        public struct CeilFloor
+        {
+            public double ceil { get; set; }
+            public double floor { get; set; }
+
+        }
+        public struct SignalInfo
+        {
+            public short left { get; set; }
+            public double center { get; set; }
+            public short right { get; set; }
+        }
 
         //PCM播放器
         public struct pcm_stream
@@ -203,7 +229,50 @@ namespace redioProj
         }
 
 
+        void get_signal(int[] max, int busy_index)
+        {
+            // 需要将busy_index-1，数组从0开始标记
+            Business busy = business[busy_index - 1]; // double[] fre, string description
+            CeilFloor cf = ceil_floor[busy_index - 1];// double ceil, double floor
+            Console.WriteLine("- - - - - - - - - - - - - - -- - -  {" + busy.fre[0] + "," + busy.fre[1] + "} 【" + busy.description + "】 - - - - - - - - - - - - - - -- - -  ");
+            int start = (int)(busy.fre[0] * 40) - 800;
+            int end = (int)(busy.fre[1] * 40) - 800;
+            Console.WriteLine("start:" + start + ",end:" + end);
+            List<int> arr_max = new List<int>();
+            for (int i = start; i < end; i++) arr_max.Add(max[i]);
 
+            LAD_0502 lad = new LAD_0502(arr_max);
+            lad.set_initial_set();
+            lad.get_ceil_threshold(cf.ceil + 0.0001);
+            lad.get_floor_threshold(cf.floor + 0.0001);
+
+            lad.find_signal_index();
+            if (lad.ceil_threshold > lad.floor_threshold && cf.floor > cf.ceil)
+            {
+                Console.WriteLine("上阈值的纯净抑制比" + cf.ceil);
+                Console.WriteLine("下阈值的纯净抑制比" + cf.floor);
+                Console.WriteLine("获得的上阈值" + lad.ceil_threshold);
+                Console.WriteLine("获得的下阈值" + lad.floor_threshold);
+                var paris = lad.get_pairs();
+                //
+                foreach (var pair in paris)
+                {
+                    int pd = pair[1].IndexOf(pair[1].Max());
+                    int lrpd = pd;
+                    pd = pair[0][pd];
+                    double cen = busy.fre[0] + (double)pd * 1.0 / 40;
+                    //Console.WriteLine("中心频率：" + center);
+                    all_signal.Add(new SignalInfo { center = cen, left = (short)(lrpd - 1), right = (short)(pair[0].Count - lrpd) });
+                    //带宽 pair[0].Count，中心频率 cen
+                    string sCen = cen.ToString("#0.0");
+                    //save_singal(sCen, pair[0].Count);
+
+                }
+                Console.WriteLine(paris.Count);
+            }
+
+
+        }
 
         private void delect_socket()
         {
@@ -535,6 +604,8 @@ namespace redioProj
                 //Console.WriteLine(index);
                 for (int i = 0; i < m.freData.Count; i++) maxArr[i] = maxArr[i] < m.freData[i] ? m.freData[i] : maxArr[i];
             }
+            for (int i = 1; i <= 51; i++)
+                get_signal(maxArr, i);
         }
 
         private void setFlowBtn_Click(object sender, EventArgs e)
@@ -572,6 +643,32 @@ namespace redioProj
 
 
             }
+        }
+
+        private void aheadFre40_Click(object sender, EventArgs e)
+        {
+            double freq = Convert.ToDouble(centerText.Text);
+            freq -= 40;
+            if (freq < 40) freq = 6000;
+            centerText.Text = (freq).ToString();
+
+            show.center_freq = (ulong)(freq * 1000000);
+            int span = ((int)freq - 40) * 40;
+
+            for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
+        }
+
+        private void nextFre40_Click(object sender, EventArgs e)
+        {
+            double freq = Convert.ToDouble(centerText.Text);
+            freq += 40;
+            if (freq > 6000) freq = 40;
+            centerText.Text = (freq).ToString();
+
+            show.center_freq = (ulong)(freq * 1000000);
+            int span = ((int)freq - 40) * 40;
+
+            for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
         }
     }
 }

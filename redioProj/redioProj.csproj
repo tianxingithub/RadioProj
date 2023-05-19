@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="config\SysParam.cs" />
     <Compile Include="LAD.cs" />
+    <Compile Include="LAD_0502.cs" />
     <Compile Include="MainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
