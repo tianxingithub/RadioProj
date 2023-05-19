@@ -182,7 +182,7 @@ namespace redioProj
             if (tcpClient != null)
             {
                 tcpClient.Close();
-                tcpClient.Dispose();
+                //tcpClient.Dispose();
             }
             if (udpServes != null)
             {
