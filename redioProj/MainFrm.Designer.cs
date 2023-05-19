@@ -50,8 +50,13 @@
             this.fluoreGPanel = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.signalImgBox = new System.Windows.Forms.PictureBox();
             this.signalViewBox = new System.Windows.Forms.PictureBox();
+            this.showDpxBtn = new DevComponents.DotNetBar.ButtonX();
+            this.flowText = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX2 = new DevComponents.DotNetBar.LabelX();
+            this.setFlowBtn = new DevComponents.DotNetBar.ButtonX();
             this.receivGPanel.SuspendLayout();
             this.imgGPanel.SuspendLayout();
+            this.fluoreGPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalViewBox)).BeginInit();
             this.SuspendLayout();
@@ -178,6 +183,7 @@
             this.bandScanNumBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bandScanNumBtn.TabIndex = 8;
             this.bandScanNumBtn.Text = "频段扫描数";
+            this.bandScanNumBtn.Click += new System.EventHandler(this.bandScanNumBtn_Click);
             // 
             // singlePointBtn
             // 
@@ -191,6 +197,7 @@
             this.singlePointBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.singlePointBtn.TabIndex = 7;
             this.singlePointBtn.Text = "单频点数据";
+            this.singlePointBtn.Click += new System.EventHandler(this.singlePointBtn_Click);
             // 
             // closeReceiverBtn
             // 
@@ -348,6 +355,7 @@
             this.loadDataBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.loadDataBtn.TabIndex = 5;
             this.loadDataBtn.Text = "加载数据";
+            this.loadDataBtn.Click += new System.EventHandler(this.loadDataBtn_Click);
             // 
             // loadDataLab
             // 
@@ -395,11 +403,15 @@
             // 
             this.fluoreGPanel.CanvasColor = System.Drawing.SystemColors.Control;
             this.fluoreGPanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.fluoreGPanel.Controls.Add(this.setFlowBtn);
+            this.fluoreGPanel.Controls.Add(this.flowText);
+            this.fluoreGPanel.Controls.Add(this.labelX2);
+            this.fluoreGPanel.Controls.Add(this.showDpxBtn);
             this.fluoreGPanel.DisabledBackColor = System.Drawing.Color.Empty;
             this.fluoreGPanel.Location = new System.Drawing.Point(633, 22);
             this.fluoreGPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fluoreGPanel.Name = "fluoreGPanel";
-            this.fluoreGPanel.Size = new System.Drawing.Size(315, 230);
+            this.fluoreGPanel.Size = new System.Drawing.Size(394, 230);
             // 
             // 
             // 
@@ -451,6 +463,61 @@
             this.signalViewBox.TabIndex = 4;
             this.signalViewBox.TabStop = false;
             // 
+            // showDpxBtn
+            // 
+            this.showDpxBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.showDpxBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.showDpxBtn.Location = new System.Drawing.Point(132, 26);
+            this.showDpxBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.showDpxBtn.Name = "showDpxBtn";
+            this.showDpxBtn.Size = new System.Drawing.Size(94, 37);
+            this.showDpxBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.showDpxBtn.TabIndex = 6;
+            this.showDpxBtn.Text = "显示荧光频谱";
+            this.showDpxBtn.Click += new System.EventHandler(this.showDpxBtn_Click);
+            // 
+            // flowText
+            // 
+            // 
+            // 
+            // 
+            this.flowText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.flowText.Location = new System.Drawing.Point(151, 102);
+            this.flowText.Margin = new System.Windows.Forms.Padding(2);
+            this.flowText.Name = "flowText";
+            this.flowText.PreventEnterBeep = true;
+            this.flowText.Size = new System.Drawing.Size(75, 15);
+            this.flowText.TabIndex = 8;
+            // 
+            // labelX2
+            // 
+            this.labelX2.AutoSize = true;
+            this.labelX2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX2.Location = new System.Drawing.Point(30, 100);
+            this.labelX2.Margin = new System.Windows.Forms.Padding(2);
+            this.labelX2.Name = "labelX2";
+            this.labelX2.Size = new System.Drawing.Size(130, 18);
+            this.labelX2.TabIndex = 7;
+            this.labelX2.Text = "设置频谱上下偏移量：";
+            // 
+            // setFlowBtn
+            // 
+            this.setFlowBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.setFlowBtn.AutoSize = true;
+            this.setFlowBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.setFlowBtn.Location = new System.Drawing.Point(230, 93);
+            this.setFlowBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.setFlowBtn.Name = "setFlowBtn";
+            this.setFlowBtn.Size = new System.Drawing.Size(89, 25);
+            this.setFlowBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.setFlowBtn.TabIndex = 9;
+            this.setFlowBtn.Text = "确定偏移量";
+            this.setFlowBtn.Click += new System.EventHandler(this.setFlowBtn_Click);
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -470,6 +537,8 @@
             this.receivGPanel.PerformLayout();
             this.imgGPanel.ResumeLayout(false);
             this.imgGPanel.PerformLayout();
+            this.fluoreGPanel.ResumeLayout(false);
+            this.fluoreGPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalImgBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalViewBox)).EndInit();
             this.ResumeLayout(false);
@@ -500,6 +569,10 @@
         private DevComponents.DotNetBar.LabelX switchIpLab;
         private System.Windows.Forms.PictureBox signalImgBox;
         private System.Windows.Forms.PictureBox signalViewBox;
+        private DevComponents.DotNetBar.ButtonX setFlowBtn;
+        private DevComponents.DotNetBar.Controls.TextBoxX flowText;
+        private DevComponents.DotNetBar.LabelX labelX2;
+        private DevComponents.DotNetBar.ButtonX showDpxBtn;
     }
 }
 

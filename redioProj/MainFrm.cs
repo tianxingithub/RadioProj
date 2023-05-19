@@ -46,6 +46,12 @@ namespace redioProj
         //6000000000/1000000=600个缓存
         static public Int16[] fft_wave = new Int16[1601 * 600];
         static public Int16[] fft_temp = new Int16[1601];
+        //频谱最大值缓存
+        static public int[] max_wave = new int[1601];
+
+        //频谱图坐标偏移// 2022-11-22 11:16 
+        static int window_left_offset = 40;
+        static int window_top_offset = 60;
 
         //PCM播放器
         public struct pcm_stream
@@ -452,6 +458,45 @@ namespace redioProj
             //延时1秒
             Thread.Sleep(1);
             delect_socket();
+        }
+
+        private void singlePointBtn_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 1601; i++)
+            {
+                max_wave[i] = 350;
+                
+            }
+            UInt64 freq = (UInt64)(Convert.ToDouble(centerReceivText.Text) * 1000000);
+            Console.WriteLine("freq:" + freq);
+            show.px = window_left_offset + 800;
+
+            tcpClient_Send("FREQ " + freq.ToString() + "\r");
+            show.start_freq = 0;
+            show.stop_freq = 0;
+            show.span = 40000000;//频段扫描每次上传的带宽数据
+            show.ipan = 40000000; // 40 MHz //单频点、频段扫描分析带宽
+            tcpClient_Send("FREQ:SPAN " + show.ipan.ToString() + "\r");
+        }
+
+        private void bandScanNumBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadDataBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void setFlowBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showDpxBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
