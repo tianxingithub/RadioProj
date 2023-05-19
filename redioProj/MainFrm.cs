@@ -20,6 +20,8 @@ using System.Reflection;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace redioProj
 {
@@ -293,7 +295,79 @@ namespace redioProj
             int max_px = window_left_offset;
             double l_center_freq = draw_box(g, 1600, 300, window_left_offset, window_top_offset);
 
+            //将缓存数据压缩并绘制在画图板上
+            for (int i = 0; i < 1601; i++)
+            {
+                int divx = (int)(show.ipan / show.span);
+                divx = (divx > 0) ? divx : 1;
+                int val1 = -400;
+                int val2 = -400;
+                int val3 = 0;
+                //如果显示带宽大于show.span那么压缩数据
+                //针对频段扫描
+                for (int j = 0; j < divx; j++)
+                {
+                    val1 = fft_wave[i * divx + j];
+                    val2 = (val1 > val2) ? val1 : val2;
+                    val3 = (Int16)(300 - (val2 / 5));
+                }
 
+                if (i > 0)
+                {
+                    //绘制实时频谱线条
+                    g.DrawLine(new Pen(Brushes.GreenYellow, 1), window_left_offset + i, val3_buf, window_left_offset + i + 1, val3);
+                    //绘制最大值频谱线
+                    g.DrawLine(new Pen(Brushes.Red, 1), window_left_offset + i, max_wave[i - 1], window_left_offset + i + 1, max_wave[i]);
+                }
+
+                //保存最大值
+                if (maxFreKeepCheck.Checked == false)
+                {
+                    max_wave[i] = 360;
+                }
+                else if (val3 < max_wave[i])
+                {
+                    max_wave[i] = val3;
+                }
+
+                //保存当前点数据以便下一个点画线
+                val3_buf = val3;
+
+                //写数据到瀑布图缓存
+                //pbg_wave[i] = (Int16)val2;
+
+                //找出频谱实时值中的最大值及点位
+                if (max_py > val3)
+                {
+                    max_px = window_left_offset + i;
+                    max_py = val3;
+                    show.max_dbuv = (float)val2 / 10;
+                    show.max_index = (UInt64)i;
+                }
+
+                //将鼠标点击对应的值记录下来
+                if (window_left_offset + i == show.px)
+                {
+                    val3_py = val3;
+                    val3_px = show.px;
+                    show.cursor_dbuv = (float)val2 / 10;
+                }
+            }
+            //显示鼠标点的横坐符号
+            g.DrawString("▼", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 9, val3_py - 16);
+            //显示鼠标点对应的文字
+            g.DrawString("dbuv：" + show.cursor_dbuv.ToString() + "dbuv", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), 1300, 10);
+            show.cursor_freq = l_center_freq + (((double)show.ipan / 1000000.0) / 1600) * (show.px - window_left_offset);
+            g.DrawString("freq：" + show.cursor_freq.ToString() + "Mhz", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), 1300, 30);
+
+
+            //显示绘制的bmp图片
+            signalImgBox.CreateGraphics().DrawImage(bmp, 0, 0);
+            //pictureBox1.Dispose();
+            //释放避免内存溢出
+            g.Dispose();
+            bmp.Dispose();
+            show.update = true;
         }
 
 

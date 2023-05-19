@@ -59,6 +59,7 @@
             this.signalImgBox = new System.Windows.Forms.PictureBox();
             this.signalViewBox = new System.Windows.Forms.PictureBox();
             this.dpxBox = new System.Windows.Forms.PictureBox();
+            this.maxFreKeepCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.receivGPanel.SuspendLayout();
             this.imgGPanel.SuspendLayout();
             this.fluoreGPanel.SuspendLayout();
@@ -67,10 +68,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.dpxBox)).BeginInit();
             this.SuspendLayout();
             // 
+            // timer_fft
+            // 
+            this.timer_fft.Enabled = true;
+            this.timer_fft.Interval = 25;
+            this.timer_fft.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // receivGPanel
             // 
             this.receivGPanel.CanvasColor = System.Drawing.SystemColors.Control;
             this.receivGPanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.receivGPanel.Controls.Add(this.maxFreKeepCheck);
             this.receivGPanel.Controls.Add(this.textBoxX1);
             this.receivGPanel.Controls.Add(this.labelX1);
             this.receivGPanel.Controls.Add(this.switchIpText);
@@ -563,6 +571,21 @@
             this.dpxBox.TabIndex = 5;
             this.dpxBox.TabStop = false;
             // 
+            // maxFreKeepCheck
+            // 
+            this.maxFreKeepCheck.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.maxFreKeepCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.maxFreKeepCheck.Location = new System.Drawing.Point(112, 96);
+            this.maxFreKeepCheck.Margin = new System.Windows.Forms.Padding(2);
+            this.maxFreKeepCheck.Name = "maxFreKeepCheck";
+            this.maxFreKeepCheck.Size = new System.Drawing.Size(75, 18);
+            this.maxFreKeepCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.maxFreKeepCheck.TabIndex = 13;
+            this.maxFreKeepCheck.Text = "最大保持";
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -590,11 +613,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dpxBox)).EndInit();
             this.ResumeLayout(false);
 
-            // timer_fft
-            // 
-            this.timer_fft.Enabled = true;
-            this.timer_fft.Interval = 25;
-            this.timer_fft.Tick += new System.EventHandler(this.timer1_Tick);
         }
 
         #endregion
@@ -632,6 +650,7 @@
         private System.Windows.Forms.PictureBox dpxBox;
         private DevComponents.DotNetBar.ButtonX aheadFre40;
         private DevComponents.DotNetBar.ButtonX nextFre40;
+        private DevComponents.DotNetBar.Controls.CheckBoxX maxFreKeepCheck;
     }
 }
 
