@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer_fft = new System.Windows.Forms.Timer(this.components);
             this.receivGPanel = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
@@ -588,6 +590,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dpxBox)).EndInit();
             this.ResumeLayout(false);
 
+            // timer_fft
+            // 
+            this.timer_fft.Enabled = true;
+            this.timer_fft.Interval = 25;
+            this.timer_fft.Tick += new System.EventHandler(this.timer1_Tick);
         }
 
         #endregion

@@ -229,6 +229,74 @@ namespace redioProj
         }
 
 
+        private double draw_box(Graphics g, int width, int height, int x1, int y1)// 2022-11-22 15:41:47 
+        {
+            //背景颜色
+            g.FillRectangle(Brushes.Black, 0, 0, signalImgBox.Width, signalImgBox.Height);
+
+            //上下两条横线
+            g.DrawLine(new Pen(Brushes.White, 1), x1, y1, x1 + width, y1);
+            g.DrawLine(new Pen(Brushes.White, 1), x1, y1 + height, x1 + width, y1 + height);
+
+            //左右两条竖线
+            g.DrawLine(new Pen(Brushes.White, 1), x1, y1, x1, y1 + height);
+            g.DrawLine(new Pen(Brushes.White, 1), x1 + width, y1, x1 + width, y1 + height);
+
+            Pen fix_line = new Pen(Brushes.White, 1);
+            Pen flg_line = new Pen(Brushes.Orange, 1);
+            fix_line.DashPattern = new float[] { 2, 4 };
+            flg_line.DashPattern = new float[] { 2, 4 };
+
+            //横向虚线
+            int wy = height / 10;
+            for (int i = 0; i < 10; i++)
+            {
+                g.DrawLine((i == 8) ? flg_line : fix_line, x1, y1 + i * wy, x1 + width, y1 + i * wy);
+            }
+
+            //竖向虚线
+            int wx = width / 20;
+            for (int i = 0; i < 20; i++)
+            {
+                g.DrawLine((i == 10) ? flg_line : fix_line, x1 + i * wx, y1, x1 + i * wx, y1 + height);
+            }
+
+            //竖向数标【120~-30dbuv】
+
+            for (int i = 0; i < 11; i++)
+            {
+                int x_val = 120 - (i * wy) / 2;
+                g.DrawString(x_val.ToString(), new Font("宋体", 12), new SolidBrush(Color.White), 5, y1 + i * wy - 10);
+            }
+
+            //横向数标【频率】
+            double l_center_freq = (double)show.center_freq / 1000000.0 - show.ipan / 2000000.0;
+            double m_center_freq = (double)show.center_freq / 1000000.0;
+            double h_center_freq = (double)show.center_freq / 1000000.0 + show.ipan / 2000000.0;
+            g.DrawString(l_center_freq.ToString() + "Mhz", new Font("宋体", 12), new SolidBrush(Color.White), x1, y1 + height + 5);
+            g.DrawString(m_center_freq.ToString() + "Mhz", new Font("宋体", 12), new SolidBrush(Color.White), x1 + width / 2 - 20, y1 + height + 5);
+            g.DrawString(h_center_freq.ToString() + "Mhz", new Font("宋体", 12), new SolidBrush(Color.White), x1 + width - 70, y1 + height + 5);
+
+            return l_center_freq;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Bitmap bmp = new Bitmap(signalImgBox.Width, signalImgBox.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            // 导入代码块
+            int val3_py = 0;
+            int val3_px = window_left_offset; // window_left[top]_offset:频谱坐标偏移 line48
+            int val3_buf = 0;
+
+            int max_py = 5000;
+            int max_px = window_left_offset;
+            double l_center_freq = draw_box(g, 1600, 300, window_left_offset, window_top_offset);
+
+
+        }
+
+
         void get_signal(int[] max, int busy_index)
         {
             // 需要将busy_index-1，数组从0开始标记
