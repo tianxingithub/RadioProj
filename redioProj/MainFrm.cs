@@ -13,6 +13,8 @@ using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
+using NAudio;
+using NAudio.Wave;
 
 namespace redioProj
 {
