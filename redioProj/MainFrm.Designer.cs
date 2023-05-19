@@ -48,17 +48,19 @@
             this.centerText = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.centerLab = new DevComponents.DotNetBar.LabelX();
             this.fluoreGPanel = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.signalImgBox = new System.Windows.Forms.PictureBox();
-            this.signalViewBox = new System.Windows.Forms.PictureBox();
-            this.showDpxBtn = new DevComponents.DotNetBar.ButtonX();
+            this.setFlowBtn = new DevComponents.DotNetBar.ButtonX();
             this.flowText = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.setFlowBtn = new DevComponents.DotNetBar.ButtonX();
+            this.showDpxBtn = new DevComponents.DotNetBar.ButtonX();
+            this.signalImgBox = new System.Windows.Forms.PictureBox();
+            this.signalViewBox = new System.Windows.Forms.PictureBox();
+            this.dpxBox = new System.Windows.Forms.PictureBox();
             this.receivGPanel.SuspendLayout();
             this.imgGPanel.SuspendLayout();
             this.fluoreGPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalImgBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalViewBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dpxBox)).BeginInit();
             this.SuspendLayout();
             // 
             // receivGPanel
@@ -80,7 +82,7 @@
             this.receivGPanel.Controls.Add(this.centerReceivLab);
             this.receivGPanel.DisabledBackColor = System.Drawing.Color.Empty;
             this.receivGPanel.Location = new System.Drawing.Point(13, 17);
-            this.receivGPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.receivGPanel.Margin = new System.Windows.Forms.Padding(2);
             this.receivGPanel.Name = "receivGPanel";
             this.receivGPanel.Size = new System.Drawing.Size(304, 234);
             // 
@@ -122,7 +124,7 @@
             this.textBoxX1.Border.Class = "TextBoxBorder";
             this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.textBoxX1.Location = new System.Drawing.Point(86, 46);
-            this.textBoxX1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxX1.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxX1.Name = "textBoxX1";
             this.textBoxX1.PreventEnterBeep = true;
             this.textBoxX1.Size = new System.Drawing.Size(106, 21);
@@ -137,7 +139,7 @@
             // 
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Location = new System.Drawing.Point(15, 49);
-            this.labelX1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.labelX1.Margin = new System.Windows.Forms.Padding(2);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(56, 18);
             this.labelX1.TabIndex = 11;
@@ -150,7 +152,7 @@
             // 
             this.switchIpText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.switchIpText.Location = new System.Drawing.Point(86, 14);
-            this.switchIpText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.switchIpText.Margin = new System.Windows.Forms.Padding(2);
             this.switchIpText.Name = "switchIpText";
             this.switchIpText.PreventEnterBeep = true;
             this.switchIpText.Size = new System.Drawing.Size(106, 15);
@@ -165,7 +167,7 @@
             // 
             this.switchIpLab.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.switchIpLab.Location = new System.Drawing.Point(15, 17);
-            this.switchIpLab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.switchIpLab.Margin = new System.Windows.Forms.Padding(2);
             this.switchIpLab.Name = "switchIpLab";
             this.switchIpLab.Size = new System.Drawing.Size(56, 18);
             this.switchIpLab.TabIndex = 9;
@@ -177,7 +179,7 @@
             this.bandScanNumBtn.AutoSize = true;
             this.bandScanNumBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.bandScanNumBtn.Location = new System.Drawing.Point(188, 174);
-            this.bandScanNumBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bandScanNumBtn.Margin = new System.Windows.Forms.Padding(2);
             this.bandScanNumBtn.Name = "bandScanNumBtn";
             this.bandScanNumBtn.Size = new System.Drawing.Size(89, 25);
             this.bandScanNumBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -191,7 +193,7 @@
             this.singlePointBtn.AutoSize = true;
             this.singlePointBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.singlePointBtn.Location = new System.Drawing.Point(46, 174);
-            this.singlePointBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.singlePointBtn.Margin = new System.Windows.Forms.Padding(2);
             this.singlePointBtn.Name = "singlePointBtn";
             this.singlePointBtn.Size = new System.Drawing.Size(89, 25);
             this.singlePointBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -205,7 +207,7 @@
             this.closeReceiverBtn.AutoSize = true;
             this.closeReceiverBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.closeReceiverBtn.Location = new System.Drawing.Point(188, 126);
-            this.closeReceiverBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.closeReceiverBtn.Margin = new System.Windows.Forms.Padding(2);
             this.closeReceiverBtn.Name = "closeReceiverBtn";
             this.closeReceiverBtn.Size = new System.Drawing.Size(89, 25);
             this.closeReceiverBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -219,7 +221,7 @@
             this.conReceiverBtn.AutoSize = true;
             this.conReceiverBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.conReceiverBtn.Location = new System.Drawing.Point(46, 126);
-            this.conReceiverBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.conReceiverBtn.Margin = new System.Windows.Forms.Padding(2);
             this.conReceiverBtn.Name = "conReceiverBtn";
             this.conReceiverBtn.Size = new System.Drawing.Size(89, 25);
             this.conReceiverBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -235,7 +237,7 @@
             // 
             this.focusFreCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.focusFreCheck.Location = new System.Drawing.Point(218, 80);
-            this.focusFreCheck.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.focusFreCheck.Margin = new System.Windows.Forms.Padding(2);
             this.focusFreCheck.Name = "focusFreCheck";
             this.focusFreCheck.Size = new System.Drawing.Size(75, 18);
             this.focusFreCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -250,7 +252,7 @@
             // 
             this.showSignalCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.showSignalCheck.Location = new System.Drawing.Point(218, 50);
-            this.showSignalCheck.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.showSignalCheck.Margin = new System.Windows.Forms.Padding(2);
             this.showSignalCheck.Name = "showSignalCheck";
             this.showSignalCheck.Size = new System.Drawing.Size(75, 18);
             this.showSignalCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -265,7 +267,7 @@
             // 
             this.freMarkCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.freMarkCheck.Location = new System.Drawing.Point(218, 15);
-            this.freMarkCheck.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.freMarkCheck.Margin = new System.Windows.Forms.Padding(2);
             this.freMarkCheck.Name = "freMarkCheck";
             this.freMarkCheck.Size = new System.Drawing.Size(75, 18);
             this.freMarkCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -279,7 +281,7 @@
             // 
             this.centerReceivText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.centerReceivText.Location = new System.Drawing.Point(86, 74);
-            this.centerReceivText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.centerReceivText.Margin = new System.Windows.Forms.Padding(2);
             this.centerReceivText.Name = "centerReceivText";
             this.centerReceivText.PreventEnterBeep = true;
             this.centerReceivText.Size = new System.Drawing.Size(106, 15);
@@ -294,7 +296,7 @@
             // 
             this.centerReceivLab.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.centerReceivLab.Location = new System.Drawing.Point(15, 78);
-            this.centerReceivLab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.centerReceivLab.Margin = new System.Windows.Forms.Padding(2);
             this.centerReceivLab.Name = "centerReceivLab";
             this.centerReceivLab.Size = new System.Drawing.Size(68, 18);
             this.centerReceivLab.TabIndex = 0;
@@ -310,7 +312,7 @@
             this.imgGPanel.Controls.Add(this.centerLab);
             this.imgGPanel.DisabledBackColor = System.Drawing.Color.Empty;
             this.imgGPanel.Location = new System.Drawing.Point(345, 22);
-            this.imgGPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.imgGPanel.Margin = new System.Windows.Forms.Padding(2);
             this.imgGPanel.Name = "imgGPanel";
             this.imgGPanel.Size = new System.Drawing.Size(273, 230);
             // 
@@ -349,7 +351,7 @@
             this.loadDataBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.loadDataBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.loadDataBtn.Location = new System.Drawing.Point(23, 60);
-            this.loadDataBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.loadDataBtn.Margin = new System.Windows.Forms.Padding(2);
             this.loadDataBtn.Name = "loadDataBtn";
             this.loadDataBtn.Size = new System.Drawing.Size(56, 18);
             this.loadDataBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -366,7 +368,7 @@
             // 
             this.loadDataLab.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.loadDataLab.Location = new System.Drawing.Point(23, 71);
-            this.loadDataLab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.loadDataLab.Margin = new System.Windows.Forms.Padding(2);
             this.loadDataLab.Name = "loadDataLab";
             this.loadDataLab.Size = new System.Drawing.Size(0, 0);
             this.loadDataLab.TabIndex = 4;
@@ -378,7 +380,7 @@
             // 
             this.centerText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.centerText.Location = new System.Drawing.Point(92, 25);
-            this.centerText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.centerText.Margin = new System.Windows.Forms.Padding(2);
             this.centerText.Name = "centerText";
             this.centerText.PreventEnterBeep = true;
             this.centerText.Size = new System.Drawing.Size(75, 15);
@@ -393,7 +395,7 @@
             // 
             this.centerLab.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.centerLab.Location = new System.Drawing.Point(23, 28);
-            this.centerLab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.centerLab.Margin = new System.Windows.Forms.Padding(2);
             this.centerLab.Name = "centerLab";
             this.centerLab.Size = new System.Drawing.Size(68, 18);
             this.centerLab.TabIndex = 2;
@@ -409,7 +411,7 @@
             this.fluoreGPanel.Controls.Add(this.showDpxBtn);
             this.fluoreGPanel.DisabledBackColor = System.Drawing.Color.Empty;
             this.fluoreGPanel.Location = new System.Drawing.Point(633, 22);
-            this.fluoreGPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fluoreGPanel.Margin = new System.Windows.Forms.Padding(2);
             this.fluoreGPanel.Name = "fluoreGPanel";
             this.fluoreGPanel.Size = new System.Drawing.Size(394, 230);
             // 
@@ -443,38 +445,19 @@
             this.fluoreGPanel.TabIndex = 2;
             this.fluoreGPanel.Text = "荧光频谱";
             // 
-            // signalImgBox
+            // setFlowBtn
             // 
-            this.signalImgBox.BackColor = System.Drawing.Color.Black;
-            this.signalImgBox.Location = new System.Drawing.Point(5, 270);
-            this.signalImgBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.signalImgBox.Name = "signalImgBox";
-            this.signalImgBox.Size = new System.Drawing.Size(1660, 354);
-            this.signalImgBox.TabIndex = 3;
-            this.signalImgBox.TabStop = false;
-            // 
-            // signalViewBox
-            // 
-            this.signalViewBox.BackColor = System.Drawing.Color.Black;
-            this.signalViewBox.Location = new System.Drawing.Point(5, 628);
-            this.signalViewBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.signalViewBox.Name = "signalViewBox";
-            this.signalViewBox.Size = new System.Drawing.Size(1660, 217);
-            this.signalViewBox.TabIndex = 4;
-            this.signalViewBox.TabStop = false;
-            // 
-            // showDpxBtn
-            // 
-            this.showDpxBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.showDpxBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.showDpxBtn.Location = new System.Drawing.Point(132, 26);
-            this.showDpxBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.showDpxBtn.Name = "showDpxBtn";
-            this.showDpxBtn.Size = new System.Drawing.Size(94, 37);
-            this.showDpxBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.showDpxBtn.TabIndex = 6;
-            this.showDpxBtn.Text = "显示荧光频谱";
-            this.showDpxBtn.Click += new System.EventHandler(this.showDpxBtn_Click);
+            this.setFlowBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.setFlowBtn.AutoSize = true;
+            this.setFlowBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.setFlowBtn.Location = new System.Drawing.Point(230, 93);
+            this.setFlowBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.setFlowBtn.Name = "setFlowBtn";
+            this.setFlowBtn.Size = new System.Drawing.Size(89, 25);
+            this.setFlowBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.setFlowBtn.TabIndex = 9;
+            this.setFlowBtn.Text = "确定偏移量";
+            this.setFlowBtn.Click += new System.EventHandler(this.setFlowBtn_Click);
             // 
             // flowText
             // 
@@ -488,6 +471,7 @@
             this.flowText.PreventEnterBeep = true;
             this.flowText.Size = new System.Drawing.Size(75, 15);
             this.flowText.TabIndex = 8;
+            this.flowText.Text = "0";
             // 
             // labelX2
             // 
@@ -504,32 +488,62 @@
             this.labelX2.TabIndex = 7;
             this.labelX2.Text = "设置频谱上下偏移量：";
             // 
-            // setFlowBtn
+            // showDpxBtn
             // 
-            this.setFlowBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.setFlowBtn.AutoSize = true;
-            this.setFlowBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.setFlowBtn.Location = new System.Drawing.Point(230, 93);
-            this.setFlowBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.setFlowBtn.Name = "setFlowBtn";
-            this.setFlowBtn.Size = new System.Drawing.Size(89, 25);
-            this.setFlowBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.setFlowBtn.TabIndex = 9;
-            this.setFlowBtn.Text = "确定偏移量";
-            this.setFlowBtn.Click += new System.EventHandler(this.setFlowBtn_Click);
+            this.showDpxBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.showDpxBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.showDpxBtn.Location = new System.Drawing.Point(132, 26);
+            this.showDpxBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.showDpxBtn.Name = "showDpxBtn";
+            this.showDpxBtn.Size = new System.Drawing.Size(94, 37);
+            this.showDpxBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.showDpxBtn.TabIndex = 6;
+            this.showDpxBtn.Text = "显示荧光频谱";
+            this.showDpxBtn.Click += new System.EventHandler(this.showDpxBtn_Click);
+            // 
+            // signalImgBox
+            // 
+            this.signalImgBox.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.signalImgBox.Location = new System.Drawing.Point(5, 270);
+            this.signalImgBox.Margin = new System.Windows.Forms.Padding(2);
+            this.signalImgBox.Name = "signalImgBox";
+            this.signalImgBox.Size = new System.Drawing.Size(1660, 400);
+            this.signalImgBox.TabIndex = 3;
+            this.signalImgBox.TabStop = false;
+            // 
+            // signalViewBox
+            // 
+            this.signalViewBox.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.signalViewBox.Location = new System.Drawing.Point(5, 678);
+            this.signalViewBox.Margin = new System.Windows.Forms.Padding(2);
+            this.signalViewBox.Name = "signalViewBox";
+            this.signalViewBox.Size = new System.Drawing.Size(1660, 329);
+            this.signalViewBox.TabIndex = 4;
+            this.signalViewBox.TabStop = false;
+            // 
+            // dpxBox
+            // 
+            this.dpxBox.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.dpxBox.Location = new System.Drawing.Point(5, 270);
+            this.dpxBox.Margin = new System.Windows.Forms.Padding(2);
+            this.dpxBox.Name = "dpxBox";
+            this.dpxBox.Size = new System.Drawing.Size(1660, 737);
+            this.dpxBox.TabIndex = 5;
+            this.dpxBox.TabStop = false;
             // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1443, 844);
+            this.ClientSize = new System.Drawing.Size(1649, 961);
             this.Controls.Add(this.signalViewBox);
             this.Controls.Add(this.signalImgBox);
             this.Controls.Add(this.fluoreGPanel);
             this.Controls.Add(this.imgGPanel);
             this.Controls.Add(this.receivGPanel);
+            this.Controls.Add(this.dpxBox);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainFrm";
             this.Text = "无线电分析系统";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainFrm_FormClosed);
@@ -541,6 +555,7 @@
             this.fluoreGPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalImgBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalViewBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dpxBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -573,6 +588,11 @@
         private DevComponents.DotNetBar.Controls.TextBoxX flowText;
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.DotNetBar.ButtonX showDpxBtn;
+
+
+        //tianxin
+        private System.Windows.Forms.Timer timer_fft;
+        private System.Windows.Forms.PictureBox dpxBox;
     }
 }
 

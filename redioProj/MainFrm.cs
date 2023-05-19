@@ -15,6 +15,11 @@ using System.IO;
 using System.Runtime.InteropServices;
 using NAudio;
 using NAudio.Wave;
+using DevComponents.DotNetBar.Controls;
+using System.Reflection;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
+using Newtonsoft.Json;
 
 namespace redioProj
 {
@@ -36,11 +41,24 @@ namespace redioProj
         /// <param name="e"></param>
         private void MainFrm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
+            tcpClient_Send("ABORT;\r\n*CLS;\r\n");
+            //setAllSignalFalse();
+            //延时1秒
+            Thread.Sleep(1);
+            //关闭定时器
+            timer_fft.Enabled = false;
+            //timer_pbt.Enabled = false;
+            //timer_cal.Enabled = false;
+            //timer_sec.Enabled = false;
+            //断开连接
+            delect_socket();
             SysParam.Save();
         }
 
         // tianxin
+
+        
+
         private Socket tcpClient = null;//TCP句柄
         private Socket udpServes = null;//dup句柄
         private Thread thrUDPRecv;
@@ -54,6 +72,16 @@ namespace redioProj
         //频谱图坐标偏移// 2022-11-22 11:16 
         static int window_left_offset = 40;
         static int window_top_offset = 60;
+        
+
+        // 荧光频谱
+        Boolean draw_point = false;
+        Bitmap point_bmp;
+        int[,] points = new int[1600, 700];
+        // 荧光频谱偏移量
+        int up = 100;
+        int[] maxArr;
+        JsonData m;
 
         //PCM播放器
         public struct pcm_stream
@@ -483,22 +511,67 @@ namespace redioProj
 
         private void bandScanNumBtn_Click(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < 1601; i++)
+            {
+                max_wave[i] = 350;
+            }
+            show.start_freq = 20000000;
+            show.stop_freq = 6020000000;
+            show.span = 40000000;
+            show.ipan = (show.stop_freq - show.start_freq);
+            tcpClient_Send("FREQ:SPAN " + show.span.ToString() + "\r");
+            tcpClient_Send("FREQ:PSCan:STARt " + show.start_freq.ToString() + "\r");
+            tcpClient_Send("STOP " + show.stop_freq.ToString() + "\r");
         }
 
         private void loadDataBtn_Click(object sender, EventArgs e)
         {
-
+            maxArr = Enumerable.Repeat(-1000, 240000).ToArray();
+            for (int index = 2; index <= 11; index++)
+            {
+                string file = "E:/DataBase/2023-05-08/室内_2023-05-08_21-14-55/第" + index.ToString() + "个数据.json";
+                string jsonData = File.ReadAllText(file);
+                m = JsonConvert.DeserializeObject<JsonData>(jsonData);
+                //Console.WriteLine(index);
+                for (int i = 0; i < m.freData.Count; i++) maxArr[i] = maxArr[i] < m.freData[i] ? m.freData[i] : maxArr[i];
+            }
         }
 
         private void setFlowBtn_Click(object sender, EventArgs e)
         {
+            up = Convert.ToInt32(flowText.Text);
+            point_bmp = new Bitmap(dpxBox.Width, dpxBox.Height);
+            points = new int[1600, 700];
 
         }
 
         private void showDpxBtn_Click(object sender, EventArgs e)
         {
+            if (this.showDpxBtn.Text == "显示荧光频谱")
+            {
+                this.dpxBox.Visible = true;
+                this.signalImgBox.Visible = false;
+                this.signalViewBox.Visible = false;
+                this.showDpxBtn.Text = "结束荧光频谱";
+                draw_point = true;
+                
 
+            }
+
+            else if (this.showDpxBtn.Text == "结束荧光频谱")
+            {
+                this.dpxBox.Visible = false;
+                this.signalImgBox.Visible = true;
+                this.signalViewBox.Visible = true;
+                this.showDpxBtn.Text = "显示荧光频谱";
+                flowText.Text = "0";
+                draw_point = false;
+                points = new int[1600, 700];
+                point_bmp = new Bitmap(dpxBox.Width, dpxBox.Height);
+
+
+
+            }
         }
     }
 }

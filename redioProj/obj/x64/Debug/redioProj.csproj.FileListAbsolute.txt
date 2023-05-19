@@ -24,3 +24,5 @@ E:\VisualStudio\无线电交接\redioProj\redioProj\obj\x64\Debug\redioProj.cspr
 E:\VisualStudio\无线电交接\redioProj\redioProj\obj\x64\Debug\redioProj.csproj.CopyComplete
 E:\VisualStudio\无线电交接\redioProj\redioProj\obj\x64\Debug\redioProj.exe
 E:\VisualStudio\无线电交接\redioProj\redioProj\obj\x64\Debug\redioProj.pdb
+E:\VisualStudio\无线电交接\redioProj\redioProj\bin\x64\Debug\NAudio.dll
+E:\VisualStudio\无线电交接\redioProj\redioProj\bin\x64\Debug\NAudio.xml
