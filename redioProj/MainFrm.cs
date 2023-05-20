@@ -208,9 +208,7 @@ namespace redioProj
             Thread.Sleep(1);
             //关闭定时器
             timer_fft.Enabled = false;
-            //timer_pbt.Enabled = false;
-            //timer_cal.Enabled = false;
-            //timer_sec.Enabled = false;
+
             //断开连接
             delect_socket();
             SysParam.Save();
@@ -1032,9 +1030,9 @@ namespace redioProj
                 {
 
                     byte[] Bytes = Encoding.ASCII.GetBytes(cmd);
-                    tcpClient.Send(Bytes); // 退出有Bug
+                    //tcpClient.Send(Bytes); // 退出有Bug
                     byte[] Rec = new byte[2048];
-                    int len = tcpClient.Receive(Rec);
+                    //int len = tcpClient.Receive(Rec);
                     return Encoding.ASCII.GetString(Rec);
                 }
             }
