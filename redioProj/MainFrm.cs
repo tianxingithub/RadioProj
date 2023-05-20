@@ -403,7 +403,7 @@ namespace redioProj
                     double p_center_freq = l_center_freq + (((double)show.ipan / 1000000.0) / 1600) * (show.px - window_left_offset);
                     centerReceivText.Text = p_center_freq.ToString();
                     centerText.Text = p_center_freq.ToString();
-                    show.px = window_left_offset + 800;   
+                    //show.px = window_left_offset + 800;   
                     singlePointBtn_Click(singlePointBtn, null);
                 }
             }
@@ -532,12 +532,51 @@ namespace redioProj
                 }
             }
 
+            //所有信号的绘制[只绘制40MHz内的]
+            if (all_signal.Count != 0)
+            {
+                int cen = (int)show.center_freq / 1000000;//signalList.FindIndex(x => x.center == signalList.Max(y => y.center));
+                int startIndex = all_signal.FindIndex(x_ => x_.center >= (cen - 20));
+                int endIndex = all_signal.FindLastIndex(x_ => x_.center <= (cen + 20));
+                List<SignalInfo> rangeList = all_signal.GetRange(startIndex, endIndex - startIndex + 1);
+
+                // 绘制范围内的所有信号
+                foreach (var sig in rangeList)
+                {
+                    double x = (sig.center - cen + 20) * 40;
+                    int max_fre = (int)x;
+                    // 绘制信息附近信号
+                    int left = max_fre - 2;
+                    int right = max_fre + 2;
+                    if (widthSignCheck.Checked) // 信号标记方式
+                    {
+                        left = max_fre - sig.left;
+                        right = max_fre + sig.right;
+                    }
+                    for (int i = left; i <= right; i++)
+                    {
+                        i = (i <= 0) ? 1 : i;
+                        float yy1 = (float)fft_wave[i - 1];
+                        float yy2 = (float)fft_wave[i];
+                        g.DrawLine(new Pen(Brushes.Red, 1), window_left_offset + i, 300 - (yy1 / 5), window_left_offset + i + 1, 300 - (yy2 / 5));
+
+                    }
+                    g.DrawString(sig.center.ToString("#0.0"), new Font("宋体", 8), new SolidBrush(Color.Red),
+                        max_fre + window_left_offset - 20, (float)(300 - ((int)fft_wave[max_fre] / 5)) - 20);
+                    g.DrawString(sig.center.ToString("▼"), new Font("宋体", 8), new SolidBrush(Color.Yellow),
+                        max_fre + window_left_offset - 20, (float)(300 - ((int)fft_wave[max_fre] / 5)) - 30);
+                    //Console.WriteLine(max_fre + "- - - -- - - - -- ");
+                }
+                g.DrawString("该范围内信号个数：" + rangeList.Count.ToString(), new Font("宋体", 12), new SolidBrush(Color.GreenYellow), 40, 20);
+            }
 
 
 
+            //频谱最大值
+            show.max_freq = l_center_freq + (((double)show.ipan / 1000000.0) / 1600) * (max_px - window_left_offset);
             //显示鼠标点的横坐符号
             g.DrawString("▼", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 9, val3_py - 16);
-            g.DrawString(show.cursor_freq.ToString(), new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 9, val3_py - 24);
+            //g.DrawString(show.cursor_freq.ToString(), new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 9, val3_py - 24);
             //显示鼠标点对应的文字
             g.DrawString("dbuv：" + show.cursor_dbuv.ToString() + "dbuv", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), 1300, 10);
             show.cursor_freq = l_center_freq + (((double)show.ipan / 1000000.0) / 1600) * (show.px - window_left_offset);
@@ -980,7 +1019,14 @@ namespace redioProj
             show.center_freq = (ulong)(freq * 1000000);
             int span = ((int)freq - 40) * 40;
 
-            for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
+            try
+            {
+                for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
+            }
+            catch
+            {
+
+            }
         }
 
         private void nextFre40_Click(object sender, EventArgs e)
@@ -989,6 +1035,23 @@ namespace redioProj
             freq += 40;
             if (freq > 6000) freq = 40;
             centerText.Text = (freq).ToString();
+
+            show.center_freq = (ulong)(freq * 1000000);
+            int span = ((int)freq - 40) * 40;
+
+            try { 
+                for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span]; 
+            }
+            catch(IndexOutOfRangeException e1)
+            {
+                Console.WriteLine("IndexOutOfRangeException: {0}", e1);
+            }
+            
+        }
+
+        private void setCenterFreBtn_Click(object sender, EventArgs e)
+        {
+            double freq = Convert.ToDouble(centerText.Text);
 
             show.center_freq = (ulong)(freq * 1000000);
             int span = ((int)freq - 40) * 40;

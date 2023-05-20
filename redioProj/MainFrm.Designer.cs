@@ -60,6 +60,8 @@
             this.signalImgBox = new System.Windows.Forms.PictureBox();
             this.signalViewBox = new System.Windows.Forms.PictureBox();
             this.dpxBox = new System.Windows.Forms.PictureBox();
+            this.setCenterFreBtn = new DevComponents.DotNetBar.ButtonX();
+            this.widthSignCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.receivGPanel.SuspendLayout();
             this.imgGPanel.SuspendLayout();
             this.fluoreGPanel.SuspendLayout();
@@ -313,6 +315,7 @@
             this.centerReceivText.PreventEnterBeep = true;
             this.centerReceivText.Size = new System.Drawing.Size(106, 15);
             this.centerReceivText.TabIndex = 1;
+            this.centerReceivText.Text = "100";
             // 
             // centerReceivLab
             // 
@@ -333,6 +336,8 @@
             // 
             this.imgGPanel.CanvasColor = System.Drawing.SystemColors.Control;
             this.imgGPanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.imgGPanel.Controls.Add(this.widthSignCheck);
+            this.imgGPanel.Controls.Add(this.setCenterFreBtn);
             this.imgGPanel.Controls.Add(this.aheadFre40);
             this.imgGPanel.Controls.Add(this.nextFre40);
             this.imgGPanel.Controls.Add(this.loadDataBtn);
@@ -440,6 +445,7 @@
             this.centerText.PreventEnterBeep = true;
             this.centerText.Size = new System.Drawing.Size(75, 15);
             this.centerText.TabIndex = 3;
+            this.centerText.Text = "100";
             // 
             // centerLab
             // 
@@ -586,6 +592,34 @@
             this.dpxBox.TabIndex = 5;
             this.dpxBox.TabStop = false;
             // 
+            // setCenterFreBtn
+            // 
+            this.setCenterFreBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.setCenterFreBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.setCenterFreBtn.Location = new System.Drawing.Point(171, 25);
+            this.setCenterFreBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.setCenterFreBtn.Name = "setCenterFreBtn";
+            this.setCenterFreBtn.Size = new System.Drawing.Size(68, 18);
+            this.setCenterFreBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.setCenterFreBtn.TabIndex = 8;
+            this.setCenterFreBtn.Text = "设置";
+            this.setCenterFreBtn.Click += new System.EventHandler(this.setCenterFreBtn_Click);
+            // 
+            // widthSignCheck
+            // 
+            this.widthSignCheck.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.widthSignCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.widthSignCheck.Location = new System.Drawing.Point(82, 93);
+            this.widthSignCheck.Margin = new System.Windows.Forms.Padding(2);
+            this.widthSignCheck.Name = "widthSignCheck";
+            this.widthSignCheck.Size = new System.Drawing.Size(136, 18);
+            this.widthSignCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.widthSignCheck.TabIndex = 14;
+            this.widthSignCheck.Text = "采用带宽标记信号";
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -651,6 +685,8 @@
         private DevComponents.DotNetBar.ButtonX aheadFre40;
         private DevComponents.DotNetBar.ButtonX nextFre40;
         private DevComponents.DotNetBar.Controls.CheckBoxX maxFreKeepCheck;
+        private DevComponents.DotNetBar.ButtonX setCenterFreBtn;
+        private DevComponents.DotNetBar.Controls.CheckBoxX widthSignCheck;
     }
 }
 
