@@ -1,60 +1,41 @@
+<?xml version="1.0" standalone="yes"?>
 <Parameter Name="Param">
-	<CameraParam  tip="相机参数">
-		<CameraIP  value="192.168.1.66" tip="相机IP" />
-		<CameraPicPort value="60221" tip="可见光数据端口[TCP]" />
-		<CameraIRPort value="60222" tip="红外光数据端口[TCP]" />
-		<FrameRateOfPIC value="30" tip="可见光帧率"/>
-		<FrameReteOfIR value ="60" tip="红外光帧率" />
-		<VideoPath value="D:/video" tip="视频存储位置" />
-		<MaxTemperature value ="500" tip="红外光帧率最高温度限制" />
-		<ImgSizePic value="1.5" tip="可见光图像一张大小(M)" />
-		<ImgSizeIR value="1" tip="红外光图像一张大小(M)" />
-		<VideoMaxSize value="300" tip="每个视频的最大尺寸(M)" />
-		<PicSize w="1440" h="1440" tip="可见光图像大小(像素)" />
-		<IRSize w="640" h="480" tip="可见光图像大小(像素)" />
-	</CameraParam>
-	<PathParam>
-		<DataPath value="D:\1C相关软件\2023_03_03" tip="监测数据路径"/>
-		<WavePath value="" tip="Wave保存路径" />
-		<BasePath value="" tip="基础数据路径" />
-		<ExcelSavePath value="" tip="报表导出路径" />
-	</PathParam>
-	<HiDefaultParam tip="高铁动态缺陷诊断标准">
-		<!--动态拉出值-->
-		<DeductScore 超限项="1" 描述="动态拉出值" 等级="1" fMin="-450" fMax="450" 扣分="40" 标准值="false" 速度="null"/>
-
-		<!--动态导高值-->
-		<DeductScore 超限项="2" 描述="动态接触线高度" 等级="1" fMin="-8000" fMax="5400" 扣分="40" 标准值="false" 速度="null" />
-
-	</HiDefaultParam>
-	<CQIParam tip="CQI计算参数">
-		<DeltaS value="30" tip="拉出值施工允许误差(mm)" />
-		<DeltaH  value="30" tip="接触线高度施工允许误差(mm)" />
-		<CQIMgrH value="20" tip="CQI 管理值-高铁"/>
-		<CQIMgrN value="40" tip="CQI 管理值-普速"/>
-		<!--		<serialport PortName="COM1" Parity="None" DataBits="8" StopBits="One"/> -->
-	</CQIParam>
-
-
-	<LevelItemszig Level="1" Text="1" Fen="40" LineStruct="0" Relative="false" Minv="550" Maxv="8000" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
-
-	<LevelItemszig Level="1" Text="1" Fen="10" LineStruct="0" Relative="false" Minv="500" Maxv="550" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
-
-	<LevelItemszig Level="2" Text="2" Fen="5" LineStruct="0" Relative="false" Minv="450" Maxv="500" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
-
-	
-	<LevelItemshei Level="1" Text="1" Fen="40" LineStruct="0" Relative="false" Minv="6600" Maxv="8000" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
-
-	<LevelItemshei Level="1" Text="1" Fen="5" LineStruct="0" Relative="false" Minv="6500" Maxv="6600" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
-
-	<LevelItemshei Level="1" Text="1" Fen="5" LineStruct="0" Relative="true" Minv="150" Maxv="0" Minef="true" Maxef="false" Abs="false" Note="" Bumin="true" Bumax="true" />
-
-	<LevelItemshei Level="2" Text="2" Fen="1" LineStruct="0" Relative="true" Minv="100" Maxv="150" Minef="true" Maxef="false" Abs="false" Note="" Bumin="true" Bumax="true" />
-
-	<LevelItemshei Level="2" Text="2" Fen="1" LineStruct="0" Relative="true" Minv="-100" Maxv="-50" Minef="true" Maxef="false" Abs="false" Note="" Bumin="true" Bumax="true" />
-
-
-
-
-
+  <CameraParam tip="相机参数">
+    <CameraIP value="192.168.1.66" tip="相机IP" />
+    <CameraPicPort value="60221" tip="可见光数据端口[TCP]" />
+    <CameraIRPort value="60222" tip="红外光数据端口[TCP]" />
+    <FrameRateOfPIC value="30" tip="可见光帧率" />
+    <FrameReteOfIR value="60" tip="红外光帧率" />
+    <VideoPath value="D:/video" tip="视频存储位置" />
+    <MaxTemperature value="500" tip="红外光帧率最高温度限制" />
+    <ImgSizePic value="1.5" tip="可见光图像一张大小(M)" />
+    <ImgSizeIR value="1" tip="红外光图像一张大小(M)" />
+    <VideoMaxSize value="300" tip="每个视频的最大尺寸(M)" />
+    <PicSize w="1440" h="1440" tip="可见光图像大小(像素)" />
+    <IRSize w="640" h="480" tip="可见光图像大小(像素)" />
+  </CameraParam>
+  <PathParam>
+    <DataPath value="D:\1C相关软件\2023_03_03" tip="监测数据路径" />
+    <WavePath value="" tip="Wave保存路径" />
+    <BasePath value="" tip="基础数据路径" />
+    <ExcelSavePath value="" tip="报表导出路径" />
+  </PathParam>
+  <HiDefaultParam tip="高铁动态缺陷诊断标准">
+    <DeductScore 超限项="1" 描述="动态拉出值" 等级="1" fMin="-450" fMax="450" 扣分="40" 标准值="false" 速度="null" />
+    <DeductScore 超限项="2" 描述="动态接触线高度" 等级="1" fMin="-8000" fMax="5400" 扣分="40" 标准值="false" 速度="null" />
+  </HiDefaultParam>
+  <CQIParam tip="CQI计算参数">
+    <DeltaS value="30" tip="拉出值施工允许误差(mm)" />
+    <DeltaH value="30" tip="接触线高度施工允许误差(mm)" />
+    <CQIMgrH value="20" tip="CQI 管理值-高铁" />
+    <CQIMgrN value="40" tip="CQI 管理值-普速" />
+  </CQIParam>
+  <LevelItemszig Level="1" Text="1" Fen="40" LineStruct="0" Relative="false" Minv="550" Maxv="8000" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
+  <LevelItemszig Level="1" Text="1" Fen="10" LineStruct="0" Relative="false" Minv="500" Maxv="550" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
+  <LevelItemszig Level="2" Text="2" Fen="5" LineStruct="0" Relative="false" Minv="450" Maxv="500" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
+  <LevelItemshei Level="1" Text="1" Fen="40" LineStruct="0" Relative="false" Minv="6600" Maxv="8000" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
+  <LevelItemshei Level="1" Text="1" Fen="5" LineStruct="0" Relative="false" Minv="6500" Maxv="6600" Minef="true" Maxef="false" Abs="true" Note="" Bumin="true" Bumax="true" />
+  <LevelItemshei Level="1" Text="1" Fen="5" LineStruct="0" Relative="true" Minv="150" Maxv="0" Minef="true" Maxef="false" Abs="false" Note="" Bumin="true" Bumax="true" />
+  <LevelItemshei Level="2" Text="2" Fen="1" LineStruct="0" Relative="true" Minv="100" Maxv="150" Minef="true" Maxef="false" Abs="false" Note="" Bumin="true" Bumax="true" />
+  <LevelItemshei Level="2" Text="2" Fen="1" LineStruct="0" Relative="true" Minv="-100" Maxv="-50" Minef="true" Maxef="false" Abs="false" Note="" Bumin="true" Bumax="true" />
 </Parameter>

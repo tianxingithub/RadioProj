@@ -571,6 +571,7 @@
             this.signalImgBox.Size = new System.Drawing.Size(1660, 400);
             this.signalImgBox.TabIndex = 3;
             this.signalImgBox.TabStop = false;
+            this.signalImgBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
             // signalViewBox
             // 
