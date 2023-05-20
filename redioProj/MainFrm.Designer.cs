@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.timer_fft = new System.Windows.Forms.Timer(this.components);
             this.receivGPanel = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.maxFreKeepCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.switchIpText = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -59,7 +60,6 @@
             this.signalImgBox = new System.Windows.Forms.PictureBox();
             this.signalViewBox = new System.Windows.Forms.PictureBox();
             this.dpxBox = new System.Windows.Forms.PictureBox();
-            this.maxFreKeepCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.receivGPanel.SuspendLayout();
             this.imgGPanel.SuspendLayout();
             this.fluoreGPanel.SuspendLayout();
@@ -127,6 +127,21 @@
             this.receivGPanel.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.receivGPanel.TabIndex = 0;
             this.receivGPanel.Text = "交换机";
+            // 
+            // maxFreKeepCheck
+            // 
+            this.maxFreKeepCheck.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.maxFreKeepCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.maxFreKeepCheck.Location = new System.Drawing.Point(112, 96);
+            this.maxFreKeepCheck.Margin = new System.Windows.Forms.Padding(2);
+            this.maxFreKeepCheck.Name = "maxFreKeepCheck";
+            this.maxFreKeepCheck.Size = new System.Drawing.Size(75, 18);
+            this.maxFreKeepCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.maxFreKeepCheck.TabIndex = 13;
+            this.maxFreKeepCheck.Text = "最大保持";
             // 
             // textBoxX1
             // 
@@ -571,26 +586,11 @@
             this.dpxBox.TabIndex = 5;
             this.dpxBox.TabStop = false;
             // 
-            // maxFreKeepCheck
-            // 
-            this.maxFreKeepCheck.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.maxFreKeepCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.maxFreKeepCheck.Location = new System.Drawing.Point(112, 96);
-            this.maxFreKeepCheck.Margin = new System.Windows.Forms.Padding(2);
-            this.maxFreKeepCheck.Name = "maxFreKeepCheck";
-            this.maxFreKeepCheck.Size = new System.Drawing.Size(75, 18);
-            this.maxFreKeepCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.maxFreKeepCheck.TabIndex = 13;
-            this.maxFreKeepCheck.Text = "最大保持";
-            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1649, 961);
+            this.ClientSize = new System.Drawing.Size(1679, 966);
             this.Controls.Add(this.signalViewBox);
             this.Controls.Add(this.signalImgBox);
             this.Controls.Add(this.fluoreGPanel);
