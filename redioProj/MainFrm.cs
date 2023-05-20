@@ -736,10 +736,11 @@ namespace redioProj
                         g.DrawLine(new Pen(Brushes.Red, 1), window_left_offset + i, 300 - (yy1 / 5), window_left_offset + i + 1, 300 - (yy2 / 5));
 
                     }
-                    g.DrawString(sig.center.ToString("#0.0"), new Font("宋体", 8), new SolidBrush(Color.Red),
-                        max_fre + window_left_offset - 20, (float)(300 - ((int)fft_wave[max_fre] / 5)) - 20);
-                    g.DrawString(sig.center.ToString("▼"), new Font("宋体", 8), new SolidBrush(Color.Yellow),
-                        max_fre + window_left_offset - 20, (float)(300 - ((int)fft_wave[max_fre] / 5)) - 30);
+                    //g.DrawString(sig.center.ToString("#0.0"), new Font("宋体", 8), new SolidBrush(Color.Red), //数组越界
+                    //    max_fre + window_left_offset - 20, (float)(300 - ((int)fft_wave[max_fre] / 5)) - 20);
+
+                    //g.DrawString(sig.center.ToString("▼"), new Font("宋体", 8), new SolidBrush(Color.Yellow),
+                    //    max_fre + window_left_offset - 20, (float)(300 - ((int)fft_wave[max_fre] / 5)) - 30);
                     //Console.WriteLine(max_fre + "- - - -- - - - -- ");
                 }
                 g.DrawString("该范围内信号个数：" + rangeList.Count.ToString(), new Font("宋体", 12), new SolidBrush(Color.GreenYellow), 40, 20);
@@ -1154,7 +1155,7 @@ namespace redioProj
             try { 
                 for (int index = 2; index <= 11; index++)
                 {
-                    string file = "E:/DataBase/2023-05- 08/室内_2023-05-08_21-14-55/第" + index.ToString() + "个数据.json";
+                    string file = "E:/DataBase/2023-05-08/室内_2023-05-08_21-14-55/第" + index.ToString() + "个数据.json";
                     string jsonData = File.ReadAllText(file);
                     m = JsonConvert.DeserializeObject<JsonData>(jsonData);
                     for (int i = 0; i < m.freData.Count; i++) maxArr[i] = maxArr[i] < m.freData[i] ? m.freData[i] : maxArr[i];
