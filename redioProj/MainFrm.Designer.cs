@@ -384,7 +384,7 @@
             // 
             this.aheadFre40.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.aheadFre40.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.aheadFre40.Location = new System.Drawing.Point(49, 128);
+            this.aheadFre40.Location = new System.Drawing.Point(35, 40);
             this.aheadFre40.Margin = new System.Windows.Forms.Padding(2);
             this.aheadFre40.Name = "aheadFre40";
             this.aheadFre40.Size = new System.Drawing.Size(56, 18);
@@ -397,7 +397,7 @@
             // 
             this.nextFre40.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.nextFre40.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.nextFre40.Location = new System.Drawing.Point(162, 121);
+            this.nextFre40.Location = new System.Drawing.Point(135, 37);
             this.nextFre40.Margin = new System.Windows.Forms.Padding(2);
             this.nextFre40.Name = "nextFre40";
             this.nextFre40.Size = new System.Drawing.Size(56, 18);
@@ -410,7 +410,7 @@
             // 
             this.loadDataBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.loadDataBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.loadDataBtn.Location = new System.Drawing.Point(92, 66);
+            this.loadDataBtn.Location = new System.Drawing.Point(35, 2);
             this.loadDataBtn.Margin = new System.Windows.Forms.Padding(2);
             this.loadDataBtn.Name = "loadDataBtn";
             this.loadDataBtn.Size = new System.Drawing.Size(56, 18);
@@ -439,7 +439,7 @@
             // 
             // 
             this.centerText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.centerText.Location = new System.Drawing.Point(92, 25);
+            this.centerText.Location = new System.Drawing.Point(92, 59);
             this.centerText.Margin = new System.Windows.Forms.Padding(2);
             this.centerText.Name = "centerText";
             this.centerText.PreventEnterBeep = true;
@@ -455,7 +455,7 @@
             // 
             // 
             this.centerLab.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.centerLab.Location = new System.Drawing.Point(23, 28);
+            this.centerLab.Location = new System.Drawing.Point(23, 62);
             this.centerLab.Margin = new System.Windows.Forms.Padding(2);
             this.centerLab.Name = "centerLab";
             this.centerLab.Size = new System.Drawing.Size(68, 18);
@@ -596,7 +596,7 @@
             // 
             this.setCenterFreBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.setCenterFreBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.setCenterFreBtn.Location = new System.Drawing.Point(171, 25);
+            this.setCenterFreBtn.Location = new System.Drawing.Point(171, 59);
             this.setCenterFreBtn.Margin = new System.Windows.Forms.Padding(2);
             this.setCenterFreBtn.Name = "setCenterFreBtn";
             this.setCenterFreBtn.Size = new System.Drawing.Size(68, 18);

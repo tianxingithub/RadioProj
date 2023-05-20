@@ -22,6 +22,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 using Newtonsoft.Json;
 
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using System.Drawing.Drawing2D;
 
 namespace redioProj
 {
@@ -217,7 +218,7 @@ namespace redioProj
 
         // tianxin 加全局变量
 
-
+        static int dpx_time = 0;
 
         //全频段信号数据
         List<SignalInfo> all_signal;
@@ -387,6 +388,151 @@ namespace redioProj
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1601)]
             public Int16[] data;
         }
+        // 在下面添加函数
+
+        void draw_color_box(Graphics gp, int max_red, int up)
+        {
+            // 绘制渐变色矩形
+            int priod = max_red / 4;
+            Rectangle rect = new Rectangle(1200, 20, 400, 20);
+            LinearGradientBrush br = new LinearGradientBrush(rect, Color.Black, Color.Black, LinearGradientMode.Horizontal);
+            ColorBlend cb = new ColorBlend(); // [0,1]
+            cb.Positions = new[] { 0, 1 / 6f, 2 / 6f, 3 / 6f, 4 / 6f, 5 / 6f, 1 };
+            cb.Colors = new[] { Color.DarkBlue, Color.CornflowerBlue, Color.DarkGreen, Color.Chartreuse, Color.Yellow, Color.Orange, Color.Red };
+            br.InterpolationColors = cb;
+            // 标识
+            gp.FillRectangle(br, rect);
+            gp.DrawString("0%", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), 1200, 45);
+            gp.DrawString("10%", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), 1200 + 100 * 4, 45);
+
+            // y坐标
+            gp.DrawLine(new Pen(Brushes.White), 35, 0, 35, 700);
+            gp.DrawString("-50", new Font("宋体", 12), new SolidBrush(Color.White), 5, 700 - up + 50 - 5);
+            gp.DrawString("-75", new Font("宋体", 12), new SolidBrush(Color.White), 5, 700 - up + 75 - 5);
+            gp.DrawString("0", new Font("宋体", 12), new SolidBrush(Color.White), 5, 700 - up - 5);
+            gp.DrawString("100", new Font("宋体", 12), new SolidBrush(Color.White), 5, 700 - up - 100 - 5);
+            gp.DrawString("200", new Font("宋体", 12), new SolidBrush(Color.White), 5, 700 - up - 200 - 5);
+            gp.DrawString("400", new Font("宋体", 12), new SolidBrush(Color.White), 5, 700 - up - 400 - 5);
+
+            // x坐标
+            gp.DrawLine(new Pen(Brushes.White), 35, 700, 35 + 1600, 700);
+            double l_center_freq = (double)show.center_freq / 1000000.0 - show.ipan / 2000000.0;
+            double m_center_freq = (double)show.center_freq / 1000000.0;
+            double h_center_freq = (double)show.center_freq / 1000000.0 + show.ipan / 2000000.0;
+            //gp.DrawString(, new Font("宋体", 12), new SolidBrush(Color.White), 35 - 5, 700);
+            gp.DrawString(l_center_freq.ToString() + "Mhz", new Font("宋体", 12), new SolidBrush(Color.White), 35, 700);
+            gp.DrawString(m_center_freq.ToString() + "Mhz", new Font("宋体", 12), new SolidBrush(Color.White), 40 + 800 - 30, 700);
+            gp.DrawString(h_center_freq.ToString() + "Mhz", new Font("宋体", 12), new SolidBrush(Color.White), 40 + 1600 - 50, 700);
+        }
+
+        Pen choosePen(Graphics gp, int i, int max_red)
+        {
+
+            Color sourceColor;// = Color.Blue;
+            Color destColor;// = Color.Red;
+            int redSpace;// = destColor.R - sourceColor.R;
+            int greenSpace;// = destColor.G - sourceColor.G;
+            int blueSpace;//= destColor.B - sourceColor.B;
+
+            Color vColor = new Color();
+
+            double percet = (i * 1.0) / dpx_time; // 点出现的比例
+            //Console.WriteLine(i + "," + dpx_time + "," + percet);
+
+            //max_red = (int)(percet * 1000);
+            max_red = 200;
+            int pix_priod = max_red / 6;
+
+            int index = (int)(percet * 8000); // 点的占比0-100
+            i = index;
+            switch (i / pix_priod)
+            {
+                case 0:
+                    sourceColor = Color.DarkBlue;
+                    destColor = Color.CornflowerBlue;
+                    redSpace = destColor.R - sourceColor.R;
+                    greenSpace = destColor.G - sourceColor.G;
+                    blueSpace = destColor.B - sourceColor.B;
+
+                    vColor = Color.FromArgb(
+                        sourceColor.R + (int)((double)(i % pix_priod + 1) / pix_priod * redSpace),
+                        sourceColor.G + (int)((double)(i % pix_priod + 1) / pix_priod * greenSpace),
+                        sourceColor.B + (int)((double)(i % pix_priod + 1) / pix_priod * blueSpace)
+                    );
+                    break;
+                case 1:
+                    sourceColor = Color.CornflowerBlue;
+                    destColor = Color.DarkGreen;
+                    redSpace = destColor.R - sourceColor.R;
+                    greenSpace = destColor.G - sourceColor.G;
+                    blueSpace = destColor.B - sourceColor.B;
+
+                    vColor = Color.FromArgb(
+                        sourceColor.R + (int)((double)(i % pix_priod + 1) / pix_priod * redSpace),
+                        sourceColor.G + (int)((double)(i % pix_priod + 1) / pix_priod * greenSpace),
+                        sourceColor.B + (int)((double)(i % pix_priod + 1) / pix_priod * blueSpace)
+                    );
+                    break;
+                case 2:
+                    sourceColor = Color.DarkGreen;
+                    destColor = Color.Chartreuse;
+                    redSpace = destColor.R - sourceColor.R;
+                    greenSpace = destColor.G - sourceColor.G;
+                    blueSpace = destColor.B - sourceColor.B;
+
+                    vColor = Color.FromArgb(
+                        sourceColor.R + (int)((double)(i % pix_priod + 1) / pix_priod * redSpace),
+                        sourceColor.G + (int)((double)(i % pix_priod + 1) / pix_priod * greenSpace),
+                        sourceColor.B + (int)((double)(i % pix_priod + 1) / pix_priod * blueSpace)
+                    );
+                    break;
+                case 3:
+                    sourceColor = Color.Chartreuse;
+                    destColor = Color.Yellow;
+                    redSpace = destColor.R - sourceColor.R;
+                    greenSpace = destColor.G - sourceColor.G;
+                    blueSpace = destColor.B - sourceColor.B;
+
+                    vColor = Color.FromArgb(
+                        sourceColor.R + (int)((double)(i % pix_priod + 1) / pix_priod * redSpace),
+                        sourceColor.G + (int)((double)(i % pix_priod + 1) / pix_priod * greenSpace),
+                        sourceColor.B + (int)((double)(i % pix_priod + 1) / pix_priod * blueSpace)
+                    );
+                    break;
+                case 4:
+                    sourceColor = Color.Yellow;
+                    destColor = Color.Orange;
+                    redSpace = destColor.R - sourceColor.R;
+                    greenSpace = destColor.G - sourceColor.G;
+                    blueSpace = destColor.B - sourceColor.B;
+
+                    vColor = Color.FromArgb(
+                        sourceColor.R + (int)((double)(i % pix_priod + 1) / pix_priod * redSpace),
+                        sourceColor.G + (int)((double)(i % pix_priod + 1) / pix_priod * greenSpace),
+                        sourceColor.B + (int)((double)(i % pix_priod + 1) / pix_priod * blueSpace)
+                    );
+                    break;
+                case 5:
+                    sourceColor = Color.Orange;
+                    destColor = Color.Red;
+                    redSpace = destColor.R - sourceColor.R;
+                    greenSpace = destColor.G - sourceColor.G;
+                    blueSpace = destColor.B - sourceColor.B;
+
+                    vColor = Color.FromArgb(
+                        sourceColor.R + (int)((double)(i % pix_priod + 1) / pix_priod * redSpace),
+                        sourceColor.G + (int)((double)(i % pix_priod + 1) / pix_priod * greenSpace),
+                        sourceColor.B + (int)((double)(i % pix_priod + 1) / pix_priod * blueSpace)
+                    );
+                    break;
+                default:
+                    vColor = Color.Red;
+                    break;
+            }
+
+
+            return new Pen(vColor);
+        }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -462,6 +608,34 @@ namespace redioProj
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            // 绘制荧光频谱
+            if (draw_point)
+            {
+                
+                //int max_red = 20;
+                int max_red = 100;
+                //int up = (Convert.ToInt32(textBox4.Text));
+                //fft_wava[0,1600]是数据
+                Graphics gp = Graphics.FromImage(point_bmp);
+                draw_color_box(gp, max_red, up);
+                for (int i = 0; i < 1600; i++)
+                {
+                    int y = fft_wave[i];
+                    y += up;
+                    if (y < 0 || y >= (700))
+                        continue;
+                    points[i, y]++;
+                    //根据points[i, y]选择颜色
+                    Pen cp = choosePen(gp, points[i, y], max_red);
+                    gp.DrawEllipse(cp, new Rectangle(i + 37, 700 - y + 37, 1, 1));
+                }
+                //显示绘制的bmp图片
+                dpxBox.CreateGraphics().DrawImage(point_bmp, 0, 0);
+                //释放避免内存溢出
+                gp.Dispose();
+            }
+
+
             Bitmap bmp = new Bitmap(signalImgBox.Width, signalImgBox.Height);
             Graphics g = Graphics.FromImage(bmp);
             // 导入代码块
@@ -742,18 +916,18 @@ namespace redioProj
                     }
                 }
 
-                //单频点数据包解析 // 2022-11-22 11:37 与下面 频段扫描数据包解析 有何区别
+                //单频点数据包解析 
                 if (length == Marshal.SizeOf(ifpan))
                 {
                     //统计接收到的数据包
                     show.pack_count++;
-                    //将收到的byte数据转换成结构体 // 2022-11-24 17:09:06 
+                    //将收到的byte数据转换成结构体
                     ifpan = (ifpan_stream)BytesToStruct(data, typeof(ifpan_stream));
                     //得到中心频率
                     UInt64 frequency = ((UInt64)ifpan.option.frequency_high << 32) + ifpan.option.frequency_low;
-                    //单频点数据复制到显示缓存 // 2022-11-22 12:05:57
+                    //单频点数据复制到显示缓存 
                     if (show.ipan <= 40000000)
-                    {// 2022-11-22 15:17:17 40Mhz (M:megahertz)                    
+                    {                
                         show.center_freq = frequency;
                         //检查数据包是否有错乱数据(120.0dbuv~-70.0dbuv)
                         short max = ifpan.data.Max();
@@ -780,8 +954,6 @@ namespace redioProj
                 //频段扫描数据包解析 
                 if (length == Marshal.SizeOf(pscan)) //3262
                 {
-                    //Console.WriteLine("频段扫描数据包:"+length);
-                    //Console.WriteLine(length); // 2023-03-10 21:33
                     //统计接收到的数据包
                     show.pack_count++;
                     //频段扫描中心频率
@@ -907,11 +1079,9 @@ namespace redioProj
         {
             if (creat_socket(Convert.ToInt32("5555"), switchIpText.Text, 4321))
             {
-                //Console.WriteLine("接收机连接成功");
-                //checkBox2.Checked = true;
+
                 UInt64 freq = (UInt64)(Convert.ToDouble(centerReceivText.Text) * 1000000);
                 tcpClient_Send("FREQ " + freq.ToString() + "\r");
-                //tcpClient_Send("mfs_path " + comboBox6.SelectedIndex.ToString() + "\r");
             }
         }
 
@@ -940,6 +1110,23 @@ namespace redioProj
             show.span = 40000000;//频段扫描每次上传的带宽数据
             show.ipan = 40000000; // 40 MHz //单频点、频段扫描分析带宽
             tcpClient_Send("FREQ:SPAN " + show.ipan.ToString() + "\r");
+
+            //刷新荧光频谱
+            if (this.widthSignCheck.Text == "结束荧光频谱")
+            {
+                this.dpxBox.Visible = false;
+                this.signalImgBox.Visible = true;
+                this.signalViewBox.Visible = true;
+
+                this.dpxBox.Visible = true;
+                this.signalImgBox.Visible = false;
+                this.signalViewBox.Visible = false;
+
+                point_bmp = new Bitmap(dpxBox.Width, dpxBox.Height);
+                points = new int[1600, 700];
+                dpx_time = 0;
+                
+            }
         }
 
         private void bandScanNumBtn_Click(object sender, EventArgs e)
@@ -965,9 +1152,11 @@ namespace redioProj
                 string file = "E:/DataBase/2023-05-08/室内_2023-05-08_21-14-55/第" + index.ToString() + "个数据.json";
                 string jsonData = File.ReadAllText(file);
                 m = JsonConvert.DeserializeObject<JsonData>(jsonData);
-                //Console.WriteLine(index);
                 for (int i = 0; i < m.freData.Count; i++) maxArr[i] = maxArr[i] < m.freData[i] ? m.freData[i] : maxArr[i];
             }
+            double freq = Convert.ToDouble(centerText.Text);
+            int span = ((int)freq - 40) * 40;
+            for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
             for (int i = 1; i <= 51; i++)
                 get_signal(maxArr, i);
         }
@@ -975,9 +1164,17 @@ namespace redioProj
         private void setFlowBtn_Click(object sender, EventArgs e)
         {
             up = Convert.ToInt32(flowText.Text);
+            this.dpxBox.Visible = false;
+            this.signalImgBox.Visible = true;
+            this.signalViewBox.Visible = true;
+
+            this.dpxBox.Visible = true;
+            this.signalImgBox.Visible = false;
+            this.signalViewBox.Visible = false;
+
             point_bmp = new Bitmap(dpxBox.Width, dpxBox.Height);
             points = new int[1600, 700];
-
+            dpx_time = 0;
         }
 
         private void showDpxBtn_Click(object sender, EventArgs e)
@@ -989,7 +1186,6 @@ namespace redioProj
                 this.signalViewBox.Visible = false;
                 this.showDpxBtn.Text = "结束荧光频谱";
                 draw_point = true;
-                
 
             }
 
@@ -1003,7 +1199,7 @@ namespace redioProj
                 draw_point = false;
                 points = new int[1600, 700];
                 point_bmp = new Bitmap(dpxBox.Width, dpxBox.Height);
-
+                dpx_time = 0;
 
 
             }
@@ -1012,12 +1208,13 @@ namespace redioProj
         private void aheadFre40_Click(object sender, EventArgs e)
         {
             double freq = Convert.ToDouble(centerText.Text);
+            int span = ((int)freq - 40) * 40;
             freq -= 40;
             if (freq < 40) freq = 6000;
             centerText.Text = (freq).ToString();
 
             show.center_freq = (ulong)(freq * 1000000);
-            int span = ((int)freq - 40) * 40;
+            
 
             try
             {
