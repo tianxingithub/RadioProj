@@ -1151,18 +1151,25 @@ namespace redioProj
         private void loadDataBtn_Click(object sender, EventArgs e)
         {
             maxArr = Enumerable.Repeat(-1000, 240000).ToArray();
-            for (int index = 2; index <= 11; index++)
-            {
-                string file = "E:/DataBase/2023-05-08/室内_2023-05-08_21-14-55/第" + index.ToString() + "个数据.json";
-                string jsonData = File.ReadAllText(file);
-                m = JsonConvert.DeserializeObject<JsonData>(jsonData);
-                for (int i = 0; i < m.freData.Count; i++) maxArr[i] = maxArr[i] < m.freData[i] ? m.freData[i] : maxArr[i];
+            try { 
+                for (int index = 2; index <= 11; index++)
+                {
+                    string file = "E:/DataBase/2023-05- 08/室内_2023-05-08_21-14-55/第" + index.ToString() + "个数据.json";
+                    string jsonData = File.ReadAllText(file);
+                    m = JsonConvert.DeserializeObject<JsonData>(jsonData);
+                    for (int i = 0; i < m.freData.Count; i++) maxArr[i] = maxArr[i] < m.freData[i] ? m.freData[i] : maxArr[i];
+                    double freq = Convert.ToDouble(centerText.Text);
+                    int span = ((int)freq - 40) * 40;
+                    for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
+                    for (int i = 1; i <= 51; i++)
+                        get_signal(maxArr, i);
+                }
             }
-            double freq = Convert.ToDouble(centerText.Text);
-            int span = ((int)freq - 40) * 40;
-            for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
-            for (int i = 1; i <= 51; i++)
-                get_signal(maxArr, i);
+            catch {
+                MessageBox.Show("检查文件路径和文件个数是否正确", "加载Json文件出错");
+                
+            }
+           
         }
 
         private void setFlowBtn_Click(object sender, EventArgs e)
@@ -1216,6 +1223,7 @@ namespace redioProj
             freq -= 40;
             if (freq < 40) freq = 6000;
             centerText.Text = (freq).ToString();
+            centerReceivText.Text = (freq).ToString();
 
             show.center_freq = (ulong)(freq * 1000000);
             
@@ -1231,7 +1239,7 @@ namespace redioProj
             freq += 40;
             if (freq > 6000) freq = 40;
             centerText.Text = (freq).ToString();
-
+            centerReceivText.Text = (freq).ToString();
             show.center_freq = (ulong)(freq * 1000000);
             int span = ((int)freq - 40) * 40;
 

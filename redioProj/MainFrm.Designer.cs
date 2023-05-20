@@ -46,6 +46,8 @@
             this.centerReceivText = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.centerReceivLab = new DevComponents.DotNetBar.LabelX();
             this.imgGPanel = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.widthSignCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.setCenterFreBtn = new DevComponents.DotNetBar.ButtonX();
             this.aheadFre40 = new DevComponents.DotNetBar.ButtonX();
             this.nextFre40 = new DevComponents.DotNetBar.ButtonX();
             this.loadDataBtn = new DevComponents.DotNetBar.ButtonX();
@@ -60,8 +62,6 @@
             this.signalImgBox = new System.Windows.Forms.PictureBox();
             this.signalViewBox = new System.Windows.Forms.PictureBox();
             this.dpxBox = new System.Windows.Forms.PictureBox();
-            this.setCenterFreBtn = new DevComponents.DotNetBar.ButtonX();
-            this.widthSignCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.receivGPanel.SuspendLayout();
             this.imgGPanel.SuspendLayout();
             this.fluoreGPanel.SuspendLayout();
@@ -380,6 +380,34 @@
             this.imgGPanel.TabIndex = 1;
             this.imgGPanel.Text = "信号图像";
             // 
+            // widthSignCheck
+            // 
+            this.widthSignCheck.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.widthSignCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.widthSignCheck.Location = new System.Drawing.Point(82, 93);
+            this.widthSignCheck.Margin = new System.Windows.Forms.Padding(2);
+            this.widthSignCheck.Name = "widthSignCheck";
+            this.widthSignCheck.Size = new System.Drawing.Size(136, 18);
+            this.widthSignCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.widthSignCheck.TabIndex = 14;
+            this.widthSignCheck.Text = "采用带宽标记信号";
+            // 
+            // setCenterFreBtn
+            // 
+            this.setCenterFreBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.setCenterFreBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.setCenterFreBtn.Location = new System.Drawing.Point(171, 59);
+            this.setCenterFreBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.setCenterFreBtn.Name = "setCenterFreBtn";
+            this.setCenterFreBtn.Size = new System.Drawing.Size(68, 18);
+            this.setCenterFreBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.setCenterFreBtn.TabIndex = 8;
+            this.setCenterFreBtn.Text = "设置";
+            this.setCenterFreBtn.Click += new System.EventHandler(this.setCenterFreBtn_Click);
+            // 
             // aheadFre40
             // 
             this.aheadFre40.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -592,34 +620,6 @@
             this.dpxBox.Size = new System.Drawing.Size(1660, 737);
             this.dpxBox.TabIndex = 5;
             this.dpxBox.TabStop = false;
-            // 
-            // setCenterFreBtn
-            // 
-            this.setCenterFreBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.setCenterFreBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.setCenterFreBtn.Location = new System.Drawing.Point(171, 59);
-            this.setCenterFreBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.setCenterFreBtn.Name = "setCenterFreBtn";
-            this.setCenterFreBtn.Size = new System.Drawing.Size(68, 18);
-            this.setCenterFreBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.setCenterFreBtn.TabIndex = 8;
-            this.setCenterFreBtn.Text = "设置";
-            this.setCenterFreBtn.Click += new System.EventHandler(this.setCenterFreBtn_Click);
-            // 
-            // widthSignCheck
-            // 
-            this.widthSignCheck.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.widthSignCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.widthSignCheck.Location = new System.Drawing.Point(82, 93);
-            this.widthSignCheck.Margin = new System.Windows.Forms.Padding(2);
-            this.widthSignCheck.Name = "widthSignCheck";
-            this.widthSignCheck.Size = new System.Drawing.Size(136, 18);
-            this.widthSignCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.widthSignCheck.TabIndex = 14;
-            this.widthSignCheck.Text = "采用带宽标记信号";
             // 
             // MainFrm
             // 
