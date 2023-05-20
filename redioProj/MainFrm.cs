@@ -1140,6 +1140,7 @@ namespace redioProj
             tcpClient_Send("FREQ:SPAN " + show.span.ToString() + "\r");
             tcpClient_Send("FREQ:PSCan:STARt " + show.start_freq.ToString() + "\r");
             tcpClient_Send("STOP " + show.stop_freq.ToString() + "\r");
+
         }
 
         private void loadDataBtn_Click(object sender, EventArgs e)
@@ -1214,14 +1215,9 @@ namespace redioProj
             show.center_freq = (ulong)(freq * 1000000);
             
 
-            try
-            {
+            if(m!=null)
                 for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
-            }
-            catch
-            {
-
-            }
+            
         }
 
         private void nextFre40_Click(object sender, EventArgs e)
@@ -1234,13 +1230,9 @@ namespace redioProj
             show.center_freq = (ulong)(freq * 1000000);
             int span = ((int)freq - 40) * 40;
 
-            try { 
+            if (m != null)
                 for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span]; 
-            }
-            catch(IndexOutOfRangeException e1)
-            {
-                Console.WriteLine("IndexOutOfRangeException: {0}", e1);
-            }
+            
             
         }
 
@@ -1251,7 +1243,8 @@ namespace redioProj
             show.center_freq = (ulong)(freq * 1000000);
             int span = ((int)freq - 40) * 40;
 
-            for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
+            if (m != null)
+                for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
         }
     }
 }
