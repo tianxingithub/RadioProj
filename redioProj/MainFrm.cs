@@ -749,9 +749,11 @@ namespace redioProj
 
             //频谱最大值
             show.max_freq = l_center_freq + (((double)show.ipan / 1000000.0) / 1600) * (max_px - window_left_offset);
-            //显示鼠标点的横坐符号
-            g.DrawString("▼", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 9, val3_py - 16);
-            g.DrawString(show.cursor_freq.ToString()+"MHz", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 17, val3_py - 30);
+            if(focusFreCheck.Checked==true)
+            { //显示鼠标点的横坐符号
+                g.DrawString("▼", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 9, val3_py - 16);
+                g.DrawString(show.cursor_freq.ToString()+"MHz", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 17, val3_py - 30);
+            }
             //显示鼠标点对应的文字
             g.DrawString("dbuv：" + show.cursor_dbuv.ToString() + "dbuv", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), 1300, 10);
             show.cursor_freq = l_center_freq + (((double)show.ipan / 1000000.0) / 1600) * (show.px - window_left_offset);
