@@ -1,0 +1,17 @@
+E:\VisualStudio\NextRadio\redioProj\redioProj\bin\Debug\config\config.xml
+E:\VisualStudio\NextRadio\redioProj\redioProj\bin\Debug\redioProj.exe
+E:\VisualStudio\NextRadio\redioProj\redioProj\bin\Debug\redioProj.pdb
+E:\VisualStudio\NextRadio\redioProj\redioProj\bin\Debug\DevComponents.DotNetBar.Design.dll
+E:\VisualStudio\NextRadio\redioProj\redioProj\bin\Debug\DevComponents.DotNetBar2.dll
+E:\VisualStudio\NextRadio\redioProj\redioProj\bin\Debug\NAudio.dll
+E:\VisualStudio\NextRadio\redioProj\redioProj\bin\Debug\Newtonsoft.Json.dll
+E:\VisualStudio\NextRadio\redioProj\redioProj\bin\Debug\NAudio.xml
+E:\VisualStudio\NextRadio\redioProj\redioProj\bin\Debug\Newtonsoft.Json.xml
+E:\VisualStudio\NextRadio\redioProj\redioProj\obj\Debug\redioProj.csproj.AssemblyReference.cache
+E:\VisualStudio\NextRadio\redioProj\redioProj\obj\Debug\redioProj.MainFrm.resources
+E:\VisualStudio\NextRadio\redioProj\redioProj\obj\Debug\redioProj.Properties.Resources.resources
+E:\VisualStudio\NextRadio\redioProj\redioProj\obj\Debug\redioProj.csproj.GenerateResource.cache
+E:\VisualStudio\NextRadio\redioProj\redioProj\obj\Debug\redioProj.csproj.CoreCompileInputs.cache
+E:\VisualStudio\NextRadio\redioProj\redioProj\obj\Debug\redioProj.csproj.CopyComplete
+E:\VisualStudio\NextRadio\redioProj\redioProj\obj\Debug\redioProj.exe
+E:\VisualStudio\NextRadio\redioProj\redioProj\obj\Debug\redioProj.pdb
