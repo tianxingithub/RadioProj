@@ -19,6 +19,7 @@
             }
             base.Dispose(disposing);
         }
+        // tianxin: 个人认为此文件代码不重要，此文件代码为界面按钮的设置代码
 
         #region Windows 窗体设计器生成的代码
 

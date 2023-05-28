@@ -100,6 +100,7 @@ namespace redioProj
                 new Business /*51*/ { fre = new double [2]{5925, 6020}, description = "卫星，移动"}
             };
 
+            // 初始化业务对应的阈值
             ceil_floor = new CeilFloor[]
             {
                 new CeilFloor /*1*/ {floor = 0.005, ceil = 0.002},
@@ -171,6 +172,7 @@ namespace redioProj
                 //# new CeilFloor /*53*/ {floor = 0.3, ceil = 0.21},
             };
 
+            //系统数值初始化
             show.center_freq = 100000000;
             show.ipan = 40000000;
             show.start_freq = 20000000;// 
@@ -216,14 +218,14 @@ namespace redioProj
 
         // tianxin 加全局变量
 
-        static int dpx_time = 0;
+        static int dpx_time = 0; // 荧光频谱的次数
 
         //全频段信号数据
         List<SignalInfo> all_signal;
 
         Business[] business;
         CeilFloor[]ceil_floor;
-        DataTable dataTable;
+        DataTable dataTable;//Redis数据显示表
 
         private Socket tcpClient = null;//TCP句柄
         private Socket udpServes = null;//dup句柄
@@ -388,9 +390,9 @@ namespace redioProj
         }
         // 在下面添加函数
 
-        void draw_color_box(Graphics gp, int max_red, int up)
+        void draw_color_box(Graphics gp, int max_red, int up)   // 绘制渐变色矩形
         {
-            // 绘制渐变色矩形
+            
             int priod = max_red / 4;
             Rectangle rect = new Rectangle(1200, 20, 400, 20);
             LinearGradientBrush br = new LinearGradientBrush(rect, Color.Black, Color.Black, LinearGradientMode.Horizontal);
@@ -423,7 +425,7 @@ namespace redioProj
             gp.DrawString(h_center_freq.ToString() + "Mhz", new Font("宋体", 12), new SolidBrush(Color.White), 40 + 1600 - 50, 700);
         }
 
-        Pen choosePen(Graphics gp, int i, int max_red)
+        Pen choosePen(Graphics gp, int i, int max_red) // 选择绘制荧光频谱点的画笔
         {
 
             Color sourceColor;// = Color.Blue;
@@ -556,7 +558,7 @@ namespace redioProj
             }
         }
 
-        private double draw_box(Graphics g, int width, int height, int x1, int y1)// 2022-11-22 15:41:47 
+        private double draw_box(Graphics g, int width, int height, int x1, int y1)// 绘制频谱显示的框架
         {
             //背景颜色
             g.FillRectangle(Brushes.CornflowerBlue, 0, 0, signalImgBox.Width, signalImgBox.Height);
@@ -607,7 +609,7 @@ namespace redioProj
             return l_center_freq;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e) // tianxin:我认为是主体部分，这里是25ms调用一次进行刷新
         {
             // 绘制荧光频谱
             if (draw_point)
@@ -636,7 +638,7 @@ namespace redioProj
                 gp.Dispose();
             }
 
-
+            
             Bitmap bmp = new Bitmap(signalImgBox.Width, signalImgBox.Height);
             Graphics g = Graphics.FromImage(bmp);
             // 导入代码块
@@ -707,7 +709,7 @@ namespace redioProj
                 }
             }
 
-            //所有信号的绘制[只绘制40MHz内的]
+            //所有信号的绘制[只绘制40MHz内的] 【静态加载的部分】
             if (all_signal.Count != 0)
             {
                 int cen = (int)show.center_freq / 1000000;//signalList.FindIndex(x => x.center == signalList.Max(y => y.center));
@@ -771,7 +773,7 @@ namespace redioProj
         }
 
 
-        void get_signal(int[] max, int busy_index)
+        void get_signal(int[] max, int busy_index) // 根据业务求信号
         {
             // 需要将busy_index-1，数组从0开始标记
             Business busy = business[busy_index - 1]; // double[] fre, string description
@@ -851,8 +853,8 @@ namespace redioProj
                 Marshal.FreeHGlobal(buffer);
             }
         }
-        public static object BytesToStruct(byte[] bytes, Type strcutType) // 2022-11-24 17:10:04 解析数据包
-        {// 2022-11-24 20:40:21 
+        public static object BytesToStruct(byte[] bytes, Type strcutType) // 解析数据包
+        {
             Int32 size = Marshal.SizeOf(strcutType);
             IntPtr buffer = Marshal.AllocHGlobal(size); //通过使用指定的字节数,从进程的非托管内存中分配内存。
             try
@@ -869,7 +871,7 @@ namespace redioProj
         }
 
 
-        private void UDPReceiveMessage(object obj)
+        private void UDPReceiveMessage(object obj) // 获取接收机的数据
         {
             //int ps = 0;
             while (true)
@@ -987,7 +989,7 @@ namespace redioProj
             }
         }
 
-        string tcpClient_Send(String cmd)
+        string tcpClient_Send(String cmd) // 向接收机发送指令
         {
             try
             {
@@ -1048,7 +1050,7 @@ namespace redioProj
             }
         }
 
-        private bool creat_socket(Int32 TCPPort, string ClientIP, Int32 RecPort)
+        private bool creat_socket(Int32 TCPPort, string ClientIP, Int32 RecPort) // 创建套接字
         {
             try
             {
@@ -1079,6 +1081,9 @@ namespace redioProj
                 return false;
             }
         }
+
+        // ----------------------------------------------------下面函数均为界面按钮的响应事件
+
         private void conReceiverBtn_Click(object sender, EventArgs e)
         {
             if (creat_socket(Convert.ToInt32("5555"), switchIpText.Text, 4321))
