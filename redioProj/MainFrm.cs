@@ -887,26 +887,27 @@ namespace redioProj
                 {
                     // int Socket.Receive(byte[buffer) return The number of bytes received.
                     length = udpServes.Receive(data);// 2022-11-24 17:14:58 
-                                                     //if (length == 3270)// 2022-11-24 22:01:36 
-                                                     //    ps++;
-                                                     //if (length == 12868)
-                                                     //{
-                                                     //    Console.WriteLine(ps);
-                                                     //    Console.WriteLine(Marshal.SizeOf(audio));
-                                                     //    ps = 0;
-                                                     //}
-                                                     //Console.WriteLine("udp数据包:"+length);
-                                                     //Console.WriteLine(length);// 2022-11-24 16:57:37 length:3270|12868 
+                    //if (length == 3270)// 2022-11-24 22:01:36 
+                    //    ps++;
+                    //if (length == 12868)
+                    //{
+                    //    Console.WriteLine(ps);
+                    //    Console.WriteLine(Marshal.SizeOf(audio));
+                    //    ps = 0;
+                    //}
+                    //Console.WriteLine("udp数据包:"+length);
+                    //Console.WriteLine(length);// 2022-11-24 16:57:37 length:3270|12868 
                 }
                 catch
                 {
                     continue;
                 }
-
-                //音频数据包解析
-                if (length == Marshal.SizeOf(audio))
+                if (draw_point == false) // 如果在显示荧光频谱则不要声音
                 {
-
+                    //音频数据包解析
+                    if (length == Marshal.SizeOf(audio))
+                {
+                    
                     //单频点测量才播放声音
                     if (show.ipan <= 40000000)
                     {
@@ -919,6 +920,7 @@ namespace redioProj
                         {
                             continue;
                         }
+                    }
                     }
                 }
 
