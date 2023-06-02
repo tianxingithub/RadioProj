@@ -754,7 +754,7 @@ namespace redioProj
             show.max_freq = l_center_freq + (((double)show.ipan / 1000000.0) / 1600) * (max_px - window_left_offset);
             if (focusFreCheck.Checked == true)
             { //显示鼠标点的横坐符号
-                g.DrawString("▼", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 9, val3_py - 16);
+                g.DrawString("▼", new Font("宋体", 12), new SolidBrush(Color.Red), val3_px - 9, val3_py - 16);
                 g.DrawString(show.cursor_freq.ToString() + "MHz", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 17, val3_py - 30);
             }
             //显示鼠标点对应的文字
@@ -962,6 +962,7 @@ namespace redioProj
                 //频段扫描数据包解析 
                 if (length == Marshal.SizeOf(pscan)) //3262
                 {
+                    //Console.WriteLine("- - -- - - - 频段扫描数据");
                     //统计接收到的数据包
                     show.pack_count++;
                     //频段扫描中心频率
@@ -986,7 +987,8 @@ namespace redioProj
                     {
                         continue;
                     }
-
+                    //拷贝数据包
+                    pscan.data.CopyTo(fft_wave, offset * 1601);
                 }
             }
         }
@@ -1154,6 +1156,12 @@ namespace redioProj
             UInt64 strart_freq = (UInt64)(Convert.ToDouble(startFreqText.Text) * 1000000);
             UInt64 stop_freq = (UInt64)(Convert.ToDouble(stopFreqText.Text) * 1000000);
             UInt64 span_freq = 40000000;
+
+            if (spanFreqBox.SelectedIndex == 0) span_freq = 40000000;
+            if (spanFreqBox.SelectedIndex == 1) span_freq = 20000000;
+            if (spanFreqBox.SelectedIndex == 2) span_freq = 10000000;
+
+
             //UInt64 span_freq = (UInt64)((comboBox2.SelectedIndex == 0) ? 40000000 : 20000000);
             UInt64 mod_freq = (stop_freq - strart_freq) % span_freq;
             //扫描带宽判断

@@ -32,6 +32,12 @@
             this.components = new System.ComponentModel.Container();
             this.timer_fft = new System.Windows.Forms.Timer(this.components);
             this.receivGPanel = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.labelX5 = new DevComponents.DotNetBar.LabelX();
+            this.spanFreqBox = new System.Windows.Forms.ComboBox();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.startFreqText = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.stopFreqText = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.maxFreKeepCheck = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
@@ -63,10 +69,6 @@
             this.signalImgBox = new System.Windows.Forms.PictureBox();
             this.signalViewBox = new System.Windows.Forms.PictureBox();
             this.dpxBox = new System.Windows.Forms.PictureBox();
-            this.startFreqText = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.stopFreqText = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.receivGPanel.SuspendLayout();
             this.imgGPanel.SuspendLayout();
             this.fluoreGPanel.SuspendLayout();
@@ -85,6 +87,8 @@
             // 
             this.receivGPanel.CanvasColor = System.Drawing.SystemColors.Control;
             this.receivGPanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.receivGPanel.Controls.Add(this.labelX5);
+            this.receivGPanel.Controls.Add(this.spanFreqBox);
             this.receivGPanel.Controls.Add(this.labelX3);
             this.receivGPanel.Controls.Add(this.labelX4);
             this.receivGPanel.Controls.Add(this.startFreqText);
@@ -138,6 +142,94 @@
             this.receivGPanel.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.receivGPanel.TabIndex = 0;
             this.receivGPanel.Text = "交换机";
+            // 
+            // labelX5
+            // 
+            this.labelX5.AutoSize = true;
+            this.labelX5.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX5.Location = new System.Drawing.Point(325, 75);
+            this.labelX5.Margin = new System.Windows.Forms.Padding(2);
+            this.labelX5.Name = "labelX5";
+            this.labelX5.Size = new System.Drawing.Size(56, 18);
+            this.labelX5.TabIndex = 19;
+            this.labelX5.Text = "拼接带宽";
+            // 
+            // spanFreqBox
+            // 
+            this.spanFreqBox.FormattingEnabled = true;
+            this.spanFreqBox.Items.AddRange(new object[] {
+            "40MHz",
+            "20MHz",
+            "10MHz"});
+            this.spanFreqBox.Location = new System.Drawing.Point(386, 74);
+            this.spanFreqBox.Name = "spanFreqBox";
+            this.spanFreqBox.Size = new System.Drawing.Size(106, 20);
+            this.spanFreqBox.TabIndex = 18;
+            this.spanFreqBox.Text = "40MHz";
+            this.spanFreqBox.SelectedIndexChanged += new System.EventHandler(this.bandScanNumBtn_Click);
+            // 
+            // labelX3
+            // 
+            this.labelX3.AutoSize = true;
+            this.labelX3.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Location = new System.Drawing.Point(326, 49);
+            this.labelX3.Margin = new System.Windows.Forms.Padding(2);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(56, 18);
+            this.labelX3.TabIndex = 17;
+            this.labelX3.Text = "结束频率";
+            // 
+            // labelX4
+            // 
+            this.labelX4.AutoSize = true;
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX4.Location = new System.Drawing.Point(326, 17);
+            this.labelX4.Margin = new System.Windows.Forms.Padding(2);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(56, 18);
+            this.labelX4.TabIndex = 16;
+            this.labelX4.Text = "开始频率";
+            // 
+            // startFreqText
+            // 
+            // 
+            // 
+            // 
+            this.startFreqText.Border.Class = "TextBoxBorder";
+            this.startFreqText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.startFreqText.Location = new System.Drawing.Point(386, 19);
+            this.startFreqText.Margin = new System.Windows.Forms.Padding(2);
+            this.startFreqText.Name = "startFreqText";
+            this.startFreqText.PreventEnterBeep = true;
+            this.startFreqText.Size = new System.Drawing.Size(106, 21);
+            this.startFreqText.TabIndex = 15;
+            this.startFreqText.Text = "20";
+            // 
+            // stopFreqText
+            // 
+            // 
+            // 
+            // 
+            this.stopFreqText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.stopFreqText.Location = new System.Drawing.Point(386, 47);
+            this.stopFreqText.Margin = new System.Windows.Forms.Padding(2);
+            this.stopFreqText.Name = "stopFreqText";
+            this.stopFreqText.PreventEnterBeep = true;
+            this.stopFreqText.Size = new System.Drawing.Size(106, 15);
+            this.stopFreqText.TabIndex = 14;
+            this.stopFreqText.Text = "6020";
             // 
             // maxFreKeepCheck
             // 
@@ -218,7 +310,7 @@
             this.bandScanNumBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.bandScanNumBtn.AutoSize = true;
             this.bandScanNumBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.bandScanNumBtn.Location = new System.Drawing.Point(403, 80);
+            this.bandScanNumBtn.Location = new System.Drawing.Point(386, 106);
             this.bandScanNumBtn.Margin = new System.Windows.Forms.Padding(2);
             this.bandScanNumBtn.Name = "bandScanNumBtn";
             this.bandScanNumBtn.Size = new System.Drawing.Size(89, 25);
@@ -276,6 +368,9 @@
             // 
             // 
             this.focusFreCheck.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.focusFreCheck.Checked = true;
+            this.focusFreCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.focusFreCheck.CheckValue = "Y";
             this.focusFreCheck.Location = new System.Drawing.Point(218, 80);
             this.focusFreCheck.Margin = new System.Windows.Forms.Padding(2);
             this.focusFreCheck.Name = "focusFreCheck";
@@ -632,65 +727,6 @@
             this.dpxBox.TabIndex = 5;
             this.dpxBox.TabStop = false;
             // 
-            // startFreqText
-            // 
-            // 
-            // 
-            // 
-            this.startFreqText.Border.Class = "TextBoxBorder";
-            this.startFreqText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.startFreqText.Location = new System.Drawing.Point(386, 19);
-            this.startFreqText.Margin = new System.Windows.Forms.Padding(2);
-            this.startFreqText.Name = "startFreqText";
-            this.startFreqText.PreventEnterBeep = true;
-            this.startFreqText.Size = new System.Drawing.Size(106, 21);
-            this.startFreqText.TabIndex = 15;
-            this.startFreqText.Text = "20";
-            // 
-            // stopFreqText
-            // 
-            // 
-            // 
-            // 
-            this.stopFreqText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.stopFreqText.Location = new System.Drawing.Point(386, 47);
-            this.stopFreqText.Margin = new System.Windows.Forms.Padding(2);
-            this.stopFreqText.Name = "stopFreqText";
-            this.stopFreqText.PreventEnterBeep = true;
-            this.stopFreqText.Size = new System.Drawing.Size(106, 15);
-            this.stopFreqText.TabIndex = 14;
-            this.stopFreqText.Text = "6020";
-            // 
-            // labelX3
-            // 
-            this.labelX3.AutoSize = true;
-            this.labelX3.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(326, 49);
-            this.labelX3.Margin = new System.Windows.Forms.Padding(2);
-            this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(56, 18);
-            this.labelX3.TabIndex = 17;
-            this.labelX3.Text = "结束频率";
-            // 
-            // labelX4
-            // 
-            this.labelX4.AutoSize = true;
-            this.labelX4.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(326, 17);
-            this.labelX4.Margin = new System.Windows.Forms.Padding(2);
-            this.labelX4.Name = "labelX4";
-            this.labelX4.Size = new System.Drawing.Size(56, 18);
-            this.labelX4.TabIndex = 16;
-            this.labelX4.Text = "开始频率";
-            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -762,6 +798,8 @@
         private DevComponents.DotNetBar.LabelX labelX4;
         private DevComponents.DotNetBar.Controls.TextBoxX startFreqText;
         private DevComponents.DotNetBar.Controls.TextBoxX stopFreqText;
+        private DevComponents.DotNetBar.LabelX labelX5;
+        private System.Windows.Forms.ComboBox spanFreqBox;
     }
 }
 
