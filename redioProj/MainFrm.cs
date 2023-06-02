@@ -224,7 +224,7 @@ namespace redioProj
         List<SignalInfo> all_signal;
 
         Business[] business;
-        CeilFloor[]ceil_floor;
+        CeilFloor[] ceil_floor;
         DataTable dataTable;//Redis数据显示表
 
         private Socket tcpClient = null;//TCP句柄
@@ -240,7 +240,7 @@ namespace redioProj
         //频谱图坐标偏移// 2022-11-22 11:16 
         static int window_left_offset = 40;
         static int window_top_offset = 60;
-        
+
 
         // 荧光频谱
         Boolean draw_point = false;
@@ -392,7 +392,7 @@ namespace redioProj
 
         void draw_color_box(Graphics gp, int max_red, int up)   // 绘制渐变色矩形
         {
-            
+
             int priod = max_red / 4;
             Rectangle rect = new Rectangle(1200, 20, 400, 20);
             LinearGradientBrush br = new LinearGradientBrush(rect, Color.Black, Color.Black, LinearGradientMode.Horizontal);
@@ -614,7 +614,7 @@ namespace redioProj
             // 绘制荧光频谱
             if (draw_point)
             {
-                
+
                 //int max_red = 20;
                 int max_red = 100;
                 //int up = (Convert.ToInt32(textBox4.Text));
@@ -638,7 +638,7 @@ namespace redioProj
                 gp.Dispose();
             }
 
-            
+
             Bitmap bmp = new Bitmap(signalImgBox.Width, signalImgBox.Height);
             Graphics g = Graphics.FromImage(bmp);
             // 导入代码块
@@ -752,10 +752,10 @@ namespace redioProj
 
             //频谱最大值
             show.max_freq = l_center_freq + (((double)show.ipan / 1000000.0) / 1600) * (max_px - window_left_offset);
-            if(focusFreCheck.Checked==true)
+            if (focusFreCheck.Checked == true)
             { //显示鼠标点的横坐符号
                 g.DrawString("▼", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 9, val3_py - 16);
-                g.DrawString(show.cursor_freq.ToString()+"MHz", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 17, val3_py - 30);
+                g.DrawString(show.cursor_freq.ToString() + "MHz", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), val3_px - 17, val3_py - 30);
             }
             //显示鼠标点对应的文字
             g.DrawString("dbuv：" + show.cursor_dbuv.ToString() + "dbuv", new Font("宋体", 12), new SolidBrush(Color.GreenYellow), 1300, 10);
@@ -885,8 +885,9 @@ namespace redioProj
                 //阻塞接收udp数据包 
                 try
                 {
+                    
                     // int Socket.Receive(byte[buffer) return The number of bytes received.
-                    length = udpServes.Receive(data);// 2022-11-24 17:14:58 
+                    length = udpServes.Receive(data);// 卡在这里可能是防火墙的问题
                     //if (length == 3270)// 2022-11-24 22:01:36 
                     //    ps++;
                     //if (length == 12868)
@@ -895,19 +896,18 @@ namespace redioProj
                     //    Console.WriteLine(Marshal.SizeOf(audio));
                     //    ps = 0;
                     //}
-                    //Console.WriteLine("udp数据包:"+length);
-                    //Console.WriteLine(length);// 2022-11-24 16:57:37 length:3270|12868 
+                    //Console.WriteLine("udp数据包:" + length);//length:3270|12868 
                 }
                 catch
                 {
                     continue;
                 }
-                if (draw_point == false) // 如果在显示荧光频谱则不要声音
+                //if (draw_point == false) // 如果在显示荧光频谱则不要声音
+                //{
+                //音频数据包解析
+                if (length == Marshal.SizeOf(audio))
                 {
-                    //音频数据包解析
-                    if (length == Marshal.SizeOf(audio))
-                {
-                    
+
                     //单频点测量才播放声音
                     if (show.ipan <= 40000000)
                     {
@@ -921,8 +921,8 @@ namespace redioProj
                             continue;
                         }
                     }
-                    }
                 }
+                //}
 
                 //单频点数据包解析 
                 if (length == Marshal.SizeOf(ifpan))
@@ -935,7 +935,7 @@ namespace redioProj
                     UInt64 frequency = ((UInt64)ifpan.option.frequency_high << 32) + ifpan.option.frequency_low;
                     //单频点数据复制到显示缓存 
                     if (show.ipan <= 40000000)
-                    {                
+                    {
                         show.center_freq = frequency;
                         //检查数据包是否有错乱数据(120.0dbuv~-70.0dbuv)
                         short max = ifpan.data.Max();
@@ -991,7 +991,7 @@ namespace redioProj
             }
         }
 
-        string tcpClient_Send(String cmd) // 向接收机发送指令
+        string tcpClient_Send(String cmd)
         {
             try
             {
@@ -1038,11 +1038,12 @@ namespace redioProj
                 //常规命令，不需要特殊处理；只需要发送一次
                 else
                 {
-
+                    //Console.WriteLine("- - -- - - -- - - "+cmd);
                     byte[] Bytes = Encoding.ASCII.GetBytes(cmd);
-                    //tcpClient.Send(Bytes); // 退出有Bug
+                    tcpClient.Send(Bytes);
                     byte[] Rec = new byte[2048];
-                    //int len = tcpClient.Receive(Rec);
+                    int len = tcpClient.Receive(Rec);
+                    //Console.WriteLine("- - -- - - -- - - " + len);
                     return Encoding.ASCII.GetString(Rec);
                 }
             }
@@ -1088,11 +1089,15 @@ namespace redioProj
 
         private void conReceiverBtn_Click(object sender, EventArgs e)
         {
-            if (creat_socket(Convert.ToInt32("5555"), switchIpText.Text, 4321))
+            //var t1 = creat_socket(Convert.ToInt32(textBoxX1.Text), switchIpText.Text, 4321);
+            //Console.WriteLine("- - -- - - -- - - "+t1);
+            if (creat_socket(Convert.ToInt32(textBoxX1.Text), switchIpText.Text, 4321))
             {
-
+                //string s1 = switchIpText.Text;
+                //Console.WriteLine(textBoxX1.Text + "       " + switchIpText.Text+ "           "+ centerReceivText.Text);
                 UInt64 freq = (UInt64)(Convert.ToDouble(centerReceivText.Text) * 1000000);
                 tcpClient_Send("FREQ " + freq.ToString() + "\r");
+                //Console.WriteLine("- - -- - - -- - - ");
             }
         }
 
@@ -1109,7 +1114,7 @@ namespace redioProj
             for (int i = 0; i < 1601; i++)
             {
                 max_wave[i] = 350;
-                
+
             }
             UInt64 freq = (UInt64)(Convert.ToDouble(centerReceivText.Text) * 1000000);
             //Console.WriteLine("freq:" + freq);
@@ -1136,7 +1141,7 @@ namespace redioProj
                 point_bmp = new Bitmap(dpxBox.Width, dpxBox.Height);
                 points = new int[1600, 700];
                 dpx_time = 0;
-                
+
             }
         }
 
@@ -1146,10 +1151,29 @@ namespace redioProj
             {
                 max_wave[i] = 350;
             }
-            show.start_freq = 20000000;
-            show.stop_freq = 6020000000;
-            show.span = 40000000;
+            UInt64 strart_freq = (UInt64)(Convert.ToDouble(startFreqText.Text) * 1000000);
+            UInt64 stop_freq = (UInt64)(Convert.ToDouble(stopFreqText.Text) * 1000000);
+            UInt64 span_freq = 40000000;
+            //UInt64 span_freq = (UInt64)((comboBox2.SelectedIndex == 0) ? 40000000 : 20000000);
+            UInt64 mod_freq = (stop_freq - strart_freq) % span_freq;
+            //扫描带宽判断
+            if (strart_freq > stop_freq - span_freq)
+            {
+                MessageBox.Show("开始频率不能小于结束频率,请用单频点测量功能！", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            //修改设置的停止频率
+            if (mod_freq > 0)
+            {
+                stopFreqText.Text = ((stop_freq + (span_freq - mod_freq)) / 1000000).ToString();
+                stop_freq = (UInt64)(Convert.ToDouble(stopFreqText.Text) * 1000000);
+            }
+
+            show.start_freq = strart_freq;
+            show.stop_freq = stop_freq;
+            show.span = span_freq;
             show.ipan = (show.stop_freq - show.start_freq);
+
             tcpClient_Send("FREQ:SPAN " + show.span.ToString() + "\r");
             tcpClient_Send("FREQ:PSCan:STARt " + show.start_freq.ToString() + "\r");
             tcpClient_Send("STOP " + show.stop_freq.ToString() + "\r");
@@ -1159,7 +1183,8 @@ namespace redioProj
         private void loadDataBtn_Click(object sender, EventArgs e)
         {
             maxArr = Enumerable.Repeat(-1000, 240000).ToArray();
-            try { 
+            try
+            {
                 for (int index = 2; index <= 11; index++)
                 {
                     string file = "E:/DataBase/2023-05-08/室内_2023-05-08_21-14-55/第" + index.ToString() + "个数据.json";
@@ -1173,11 +1198,12 @@ namespace redioProj
                         get_signal(maxArr, i);
                 }
             }
-            catch {
+            catch
+            {
                 MessageBox.Show("检查文件路径和文件个数是否正确", "加载Json文件出错");
-                
+
             }
-           
+
         }
 
         private void setFlowBtn_Click(object sender, EventArgs e)
@@ -1234,11 +1260,11 @@ namespace redioProj
             centerReceivText.Text = (freq).ToString();
 
             show.center_freq = (ulong)(freq * 1000000);
-            
 
-            if(m!=null)
+
+            if (m != null)
                 for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
-            
+
         }
 
         private void nextFre40_Click(object sender, EventArgs e)
@@ -1252,9 +1278,9 @@ namespace redioProj
             int span = ((int)freq - 40) * 40;
 
             if (m != null)
-                for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span]; 
-            
-            
+                for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
+
+
         }
 
         private void setCenterFreBtn_Click(object sender, EventArgs e)
@@ -1267,5 +1293,7 @@ namespace redioProj
             if (m != null)
                 for (int i = 0; i < 1600; i++) fft_wave[i] = (short)m.freData[i + span];
         }
+
+        
     }
 }
